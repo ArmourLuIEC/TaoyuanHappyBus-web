@@ -15,7 +15,7 @@
   const routeColors = new Map([...data.routes].sort((first, second) => collator.compare(first.code, second.code)).map((route, index) => [route.id, palette[index % palette.length]]));
   const directionColors = { outbound: '#176b54', inbound: '#c65d47', unspecified: '#227b98' };
   const directionLabels = { outbound: '往程', inbound: '返程', unspecified: '未標方向' };
-  const state = { activeId: null, view: 'routes', routeQuery: '', stopQuery: '', operator: 'all', direction: 'all', lines: true, stopKey: null };
+  const state = { activeId: null, view: 'routes', routeQuery: '', stopQuery: '', operator: 'all', direction: 'all', stopKey: null };
   const map = L.map('map', { preferCanvas: true, fadeAnimation: false, zoomControl: false, attributionControl: true }).setView([24.98, 121.23], 10);
   L.control.zoom({ position: 'topright' }).addTo(map);
   L.control.scale({ imperial: false, position: 'bottomleft' }).addTo(map);
@@ -99,12 +99,6 @@
     if (text !== undefined) node.textContent = text;
     return node;
   };
-  const contrastingTextColor = (color) => {
-    const channels = color.slice(1).match(/../g).map((value) => parseInt(value, 16) / 255)
-      .map((value) => value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4);
-    return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2] > 0.179 ? '#000' : '#fff';
-  };
-
   function filteredRoutes() {
     const query = state.routeQuery.trim().toLocaleLowerCase();
     return data.routes.filter((route) => {
@@ -173,10 +167,6 @@
         button.append(create('span', 'route-code', route.code));
         const copy = create('span', 'row-copy');
         copy.append(create('span', 'row-operator', route.operators.join(' / ')));
-        const status = statusFor(route);
-        const statusNode = create('span', `row-status ${status.className}`);
-        statusNode.append(create('span', 'status-dot'), document.createTextNode(status.text));
-        copy.append(statusNode);
         button.append(copy);
         fragment.append(button);
       }
@@ -195,7 +185,6 @@
       const routeButton = create('button', 'command-button popup-route', `${route.code} · ${directionLabels[point.direction]}${point.sequence === null ? '' : ` ${point.sequence}`}`);
       const color = selectedRoute() ? directionColors[point.direction] : routeColors.get(route.id);
       routeButton.style.setProperty('--route-color', color);
-      routeButton.style.setProperty('--route-text-color', contrastingTextColor(color));
       routeButton.title = `查看 ${route.code} 路線與站點`;
       if (globalThis.lucide) {
         const icon = globalThis.lucide.createElement(globalThis.lucide.ArrowRight);
@@ -263,25 +252,20 @@
     const plans = routes.map((entry) => ({ route: entry, ...display.linePlan(entry, roadData.routes[entry.id], state.direction) })).filter((plan) => plan.lines.length);
     const sources = new Set(plans.map((plan) => plan.source));
     const lineSource = sources.size === 1 ? plans[0].source : sources.size > 1 ? 'mixed' : 'none';
-    element('connect-stops').disabled = !plans.length;
-    element('connect-stops').checked = Boolean(state.lines && plans.length);
-    element('connection-label').textContent = lineSource === 'official' ? '官方路線' : lineSource === 'station-sequence' ? '站序連線' : '路線連線';
     let lineCount = 0;
-    if (state.lines) {
-      for (const plan of plans) {
-        for (const line of plan.lines) {
-          const color = route ? directionColors[line.direction] : routeColors.get(plan.route.id);
-          L.polyline(line.coordinates, { color, weight: plan.source === 'official' ? route ? 4 : 2.5 : 2, opacity: route ? .8 : .65, dashArray: plan.source === 'official' ? undefined : '5 6', interactive: false }).addTo(lines);
-          lineCount += 1;
-        }
+    for (const plan of plans) {
+      for (const line of plan.lines) {
+        const color = route ? directionColors[line.direction] : routeColors.get(plan.route.id);
+        L.polyline(line.coordinates, { color, weight: plan.source === 'official' ? route ? 4 : 2.5 : 2, opacity: route ? .8 : .65, dashArray: plan.source === 'official' ? undefined : '5 6', interactive: false }).addTo(lines);
+        lineCount += 1;
       }
     }
     element('map').dataset.records = currentEntries.length;
     element('map').dataset.locations = groups.size;
     element('map').dataset.routes = new Set(currentEntries.map((entry) => entry.route.id)).size;
     element('map').dataset.lines = lineCount;
-    element('map').dataset.lineSource = state.lines && lineCount ? lineSource : 'none';
-    element('map').dataset.lineRoutes = state.lines ? plans.length : 0;
+    element('map').dataset.lineSource = lineCount ? lineSource : 'none';
+    element('map').dataset.lineRoutes = plans.length;
     element('map').dataset.numberedStops = groups.size;
     element('selection-copy').hidden = !route && !state.routeQuery && state.operator === 'all';
     element('selection-title').textContent = route ? route.code : state.routeQuery || state.operator !== 'all' ? '篩選站點' : '全部站點';
@@ -307,14 +291,13 @@
     if (fit) fitMarkers();
   }
 
-  function selectRoute(id) {
+  function selectRoute(id, fit = false) {
     state.activeId = id;
     state.direction = 'all';
     state.stopQuery = '';
     state.stopKey = null;
-    state.lines = true;
     renderSidebar();
-    renderMap();
+    renderMap(fit);
   }
 
   function resetSelection() {
@@ -329,7 +312,7 @@
 
   element('route-list').addEventListener('click', (event) => {
     const button = event.target.closest('[data-route-id]');
-    if (button) selectRoute(button.dataset.routeId);
+    if (button) selectRoute(button.dataset.routeId, true);
   });
   element('stop-list').addEventListener('click', (event) => {
     const button = event.target.closest('[data-stop-index]');
@@ -356,7 +339,6 @@
   element('back-to-routes').addEventListener('click', resetSelection);
   element('clear-route').addEventListener('click', resetSelection);
   element('fit-map').addEventListener('click', fitMarkers);
-  element('connect-stops').addEventListener('change', () => { state.lines = element('connect-stops').checked; renderMap(); });
   for (const operator of operators) {
     const option = create('option', '', operator);
     option.value = operator;
