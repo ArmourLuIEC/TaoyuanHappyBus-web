@@ -80,6 +80,16 @@
   const markers = L.featureGroup().addTo(map);
   const lines = L.featureGroup().addTo(map);
   const markerLookup = new Map();
+  let markerBounds = L.latLngBounds();
+  function updateVisibleMarkers() {
+    const bounds = map.getBounds().pad(.25);
+    for (const marker of markerLookup.values()) {
+      if (bounds.contains(marker.getLatLng())) {
+        if (!markers.hasLayer(marker)) markers.addLayer(marker);
+      } else if (markers.hasLayer(marker)) markers.removeLayer(marker);
+    }
+  }
+  map.on('moveend', updateVisibleMarkers);
   const updateMarkerScale = () => {
     element('map').dataset.markerMode = display.markerMode(map.getZoom());
     element('map').dataset.zoom = map.getZoom();
@@ -214,7 +224,7 @@
 
   function fitMarkers() {
     map.invalidateSize({ pan: false });
-    const bounds = lines.getLayers().length ? lines.getBounds() : markers.getBounds();
+    const bounds = lines.getLayers().length ? lines.getBounds() : markerBounds;
     if (bounds.isValid()) map.fitBounds(bounds, { padding: [35, 35], maxZoom: 14, animate: false });
   }
 
@@ -225,6 +235,7 @@
     markers.clearLayers();
     lines.clearLayers();
     markerLookup.clear();
+    markerBounds = L.latLngBounds();
     const groups = new Map();
     for (const entry of currentEntries) {
       const key = keyFor(entry.point);
@@ -246,8 +257,8 @@
       });
       marker.bindPopup(() => popupFor(group), { maxWidth: 295 });
       marker.bindTooltip(create('span', '', `${group.point.name || 'GPS 站點'} · ${label.full}${group.entries.length > 1 ? ` · ${group.entries.length} 筆` : ''}`), { direction: 'top' });
-      marker.addTo(markers);
       markerLookup.set(key, marker);
+      markerBounds.extend(position);
     }
     const plans = routes.map((entry) => ({ route: entry, ...display.linePlan(entry, roadData.routes[entry.id], state.direction) })).filter((plan) => plan.lines.length);
     const sources = new Set(plans.map((plan) => plan.source));
@@ -289,6 +300,7 @@
       button.hidden = button.dataset.direction === 'unspecified' && (!route || !routePoints(route).some((point) => point.direction === 'unspecified'));
     }
     if (fit) fitMarkers();
+    updateVisibleMarkers();
   }
 
   function selectRoute(id, fit = false) {
