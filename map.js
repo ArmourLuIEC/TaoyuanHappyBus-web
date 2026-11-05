@@ -2,20 +2,18 @@
   'use strict';
   const data = globalThis.BUS_STOP_DATA;
   const display = globalThis.BUS_ROUTE_DISPLAY;
+  const selection = globalThis.BUS_MAP_SELECTION;
   const roadData = globalThis.BUS_ROUTE_PATHS || { routes: {} };
-  if (!data || !globalThis.L || !display) {
+  if (!data || !globalThis.L || !display || !selection) {
     document.getElementById('fatal-error').hidden = false;
     return;
   }
   const element = (id) => document.getElementById(id);
   const format = new Intl.NumberFormat('zh-TW');
-  const collator = new Intl.Collator('zh-Hant', { numeric: true });
-  const palette = ['#137b49', '#bb3540', '#1767b0', '#ba6100', '#783d99', '#008478', '#b43173', '#695e11'];
   const operators = [...new Set(data.routes.flatMap((route) => route.operators))];
-  const routeColors = new Map([...data.routes].sort((first, second) => collator.compare(first.code, second.code)).map((route, index) => [route.id, palette[index % palette.length]]));
-  const directionColors = { outbound: '#176b54', inbound: '#c65d47', unspecified: '#227b98' };
+  const routeContext = display.createRouteContext(data, roadData);
   const directionLabels = { outbound: '往程', inbound: '返程', unspecified: '未標方向' };
-  const state = { activeId: null, view: 'routes', routeQuery: '', stopQuery: '', operator: 'all', direction: 'all', stopKey: null };
+  let state = selection.initialState();
   const map = L.map('map', { preferCanvas: true, fadeAnimation: false, zoomControl: false, attributionControl: true }).setView([24.98, 121.23], 10);
   L.control.zoom({ position: 'topright' }).addTo(map);
   L.control.scale({ imperial: false, position: 'bottomleft' }).addTo(map);
@@ -80,8 +78,7 @@
   const markers = L.featureGroup().addTo(map);
   const lines = L.featureGroup().addTo(map);
   const markerLookup = new Map();
-  let markerBounds = L.latLngBounds();
-  let lineBounds = L.latLngBounds();
+  let fitBounds = [];
   function updateVisibleMarkers() {
     const bounds = map.getBounds().pad(.25);
     for (const marker of markerLookup.values()) {
@@ -99,9 +96,8 @@
   updateMarkerScale();
   let currentEntries = [];
   let searchTimer;
-  const selectedRoute = () => data.routes.find((route) => route.id === state.activeId);
+  const selectedRoute = () => routeContext(state).route;
   const routePoints = (route) => display.routePoints(route, roadData.routes[route.id]);
-  const validPoints = (route) => routePoints(route).filter((point) => Number.isFinite(point.latitude) && Number.isFinite(point.longitude) && Math.abs(point.latitude) <= 90 && Math.abs(point.longitude) <= 180);
   const keyFor = (point) => `${point.latitude.toFixed(7)},${point.longitude.toFixed(7)}`;
   const textMatches = (text, query) => (text || '').toLocaleLowerCase().includes(query);
   const create = (tag, className, text) => {
@@ -110,21 +106,14 @@
     if (text !== undefined) node.textContent = text;
     return node;
   };
-  function filteredRoutes() {
-    const query = state.routeQuery.trim().toLocaleLowerCase();
-    return data.routes.filter((route) => {
-      if (state.operator !== 'all' && !route.operators.includes(state.operator)) return false;
-      return !query || textMatches(route.code, query) || route.operators.some((operator) => textMatches(operator, query))
-        || route.points.some((point) => textMatches(point.name, query) || textMatches(point.address, query));
-    }).sort((first, second) => collator.compare(first.code, second.code));
-  }
+  const filteredRoutes = () => routeContext(state).routes;
 
   function statusFor(route) {
     if (route.status === 'missing-pdf') return { text: '站址表缺檔', className: 'missing' };
     if (!route.points.length) return { text: 'GPS 待校對', className: 'pending' };
     const warning = route.warnings.length || route.points.some((point) => point.reviewReasons.length);
     const source = route.verification?.method === 'official-route' ? ' · 官方座標' : route.verification?.method === 'official-route-supplement' ? ' · 官方補充' : route.verification?.method === 'visual-pdf-review' ? ' · 原表已核對' : '';
-    return { text: `${format.format(validPoints(route).length)} 筆 GPS${warning ? ' · 部分待確認' : source}`, className: warning ? 'pending' : '' };
+    return { text: `${format.format(route.mappedPoints.length)} 筆 GPS${warning ? ' · 部分待確認' : source}`, className: warning ? 'pending' : '' };
   }
 
   function renderSidebar() {
@@ -133,6 +122,7 @@
     element('route-list').hidden = Boolean(stationView);
     element('stop-list').hidden = !stationView;
     element('route-filters').hidden = Boolean(stationView);
+    element('operator').value = state.operator;
     element('stops-tab').disabled = !route;
     element('routes-tab').setAttribute('aria-selected', String(!stationView));
     element('stops-tab').setAttribute('aria-selected', String(Boolean(stationView)));
@@ -172,7 +162,7 @@
       for (const route of routes) {
         const button = create('button', 'route-row');
         button.dataset.routeId = route.id;
-        button.style.setProperty('--route-color', routeColors.get(route.id));
+        button.style.setProperty('--route-color', route.color);
         button.setAttribute('aria-pressed', String(route.id === state.activeId));
         button.title = `${route.code} · ${route.operators.join(' / ')}`;
         button.append(create('span', 'route-code', route.code));
@@ -191,19 +181,18 @@
     content.append(create('div', 'popup-title', group.entries[0].point.name || 'GPS 站點'));
     content.append(create('div', 'popup-coordinates', `緯度 ${group.point.latitude.toFixed(6)}\n經度 ${group.point.longitude.toFixed(6)}`));
     const list = create('div', 'popup-list');
-    for (const { route, point } of group.entries) {
+    for (const { route, point, color, opacity } of group.entries) {
       const entry = create('div', 'popup-entry');
       const routeButton = create('button', 'command-button popup-route', `${route.code} · ${directionLabels[point.direction]}${point.sequence === null ? '' : ` ${point.sequence}`}`);
-      const color = selectedRoute() && route.id === state.activeId ? directionColors[point.direction] : routeColors.get(route.id);
       routeButton.style.setProperty('--route-color', color);
-      if (state.activeId && route.id !== state.activeId) routeButton.style.opacity = '.33';
+      routeButton.style.opacity = String(opacity);
       routeButton.title = `查看 ${route.code} 路線與站點`;
       if (globalThis.lucide) {
         const icon = globalThis.lucide.createElement(globalThis.lucide.ArrowRight);
         icon.setAttribute('aria-hidden', 'true');
         routeButton.append(icon);
       }
-      routeButton.addEventListener('click', () => { selectRoute(route.id); state.view = 'stops'; renderSidebar(); });
+      routeButton.addEventListener('click', () => dispatch({ type: 'route', routeId: route.id, source: 'popup' }));
       entry.append(routeButton);
       entry.append(create('p', '', point.address || '無可核對的站址表地址'));
       if (point.reviewReasons.length) entry.append(create('p', 'popup-warning', '官方座標待確認，保留官方原值'));
@@ -226,94 +215,54 @@
 
   function fitMarkers() {
     map.invalidateSize({ pan: false });
-    const bounds = lineBounds.isValid() ? lineBounds : markerBounds;
+    const bounds = L.latLngBounds(fitBounds);
     if (bounds.isValid()) map.fitBounds(bounds, { padding: [35, 35], maxZoom: 14, animate: false });
   }
 
   function renderMap(fit = false) {
-    const route = selectedRoute();
-    const routes = filteredRoutes();
-    if (route && !routes.some((entry) => entry.id === route.id)) routes.push(route);
-    const entries = routes.flatMap((entry) => validPoints(entry).filter((point) => (route && entry.id !== route.id) || state.direction === 'all' || point.direction === state.direction).map((point) => ({ route: entry, point })));
-    currentEntries = route ? entries.filter((entry) => entry.route.id === route.id) : entries;
+    const context = routeContext(state);
+    const { route, groups } = context;
+    currentEntries = context.currentEntries;
+    fitBounds = context.fitBounds;
     markers.clearLayers();
     lines.clearLayers();
     markerLookup.clear();
-    markerBounds = L.latLngBounds();
-    lineBounds = L.latLngBounds();
-    const groups = new Map();
-    for (const entry of entries) {
-      const key = keyFor(entry.point);
-      if (!groups.has(key)) groups.set(key, { point: entry.point, entries: [] });
-      groups.get(key).entries.push(entry);
-    }
-    for (const [key, group] of groups) {
-      const activeEntries = route ? group.entries.filter((entry) => entry.route.id === route.id) : group.entries;
-      const selectedMarker = Boolean(route && activeEntries.length);
-      const shownEntries = activeEntries.length ? activeEntries : group.entries;
-      const needsReview = shownEntries.some((entry) => entry.point.reviewReasons.length);
-      const color = needsReview ? '#b45309' : route && activeEntries.length ? directionColors[shownEntries[0].point.direction] : routeColors.get(group.entries[0].route.id);
+    for (const group of groups) {
+      const { key, selected, needsReview } = group;
       const position = [group.point.latitude, group.point.longitude];
-      const label = display.sequenceLabel(shownEntries);
-      const badge = create('span', `stop-label${needsReview ? ' stop-label-warning' : ''}${label.text.length > 3 ? ' stop-label-shared' : ''}`, selectedMarker ? label.text : '');
-      badge.style.setProperty('--marker-color', color);
-      badge.title = `${group.point.name || 'GPS 站點'}${selectedMarker ? ` · ${label.full}` : ''}`;
+      const badge = create('span', `stop-label${needsReview ? ' stop-label-warning' : ''}${group.sharedLabel ? ' stop-label-shared' : ''}`, group.text);
+      badge.style.setProperty('--marker-color', group.color);
+      badge.title = group.title;
       const marker = L.marker(position, {
-        icon: L.divIcon({ html: badge, className: `numbered-stop-marker${selectedMarker ? '' : ' stop-marker-unselected'}`, iconSize: [32, 32], iconAnchor: [16, 16] }),
+        icon: L.divIcon({ html: badge, className: `numbered-stop-marker${selected ? '' : ' stop-marker-unselected'}`, iconSize: [32, 32], iconAnchor: [16, 16] }),
         title: badge.title,
         riseOnHover: true,
-        zIndexOffset: activeEntries.length && route ? 1000 : 0,
-        opacity: route && !activeEntries.length ? .33 : 1,
+        zIndexOffset: selected ? 1000 : 0,
+        opacity: group.opacity,
       });
-      marker.on('click', () => {
-        const selected = group.entries.find((entry) => entry.route.id === state.activeId) || group.entries[0];
-        state.view = 'stops';
-        if (state.activeId !== selected.route.id) {
-          selectRoute(selected.route.id);
-          state.stopKey = key;
-          renderSidebar();
-          markerLookup.get(key)?.openPopup();
-        } else {
-          state.stopKey = key;
-          renderSidebar();
-        }
-      });
+      marker.on('click', () => dispatch({ type: 'station', routeId: group.routeId, key }));
       marker.bindPopup(() => popupFor(group), { maxWidth: 295 });
-      marker.bindTooltip(create('span', '', `${badge.title}${group.entries.length > 1 ? ` · ${group.entries.length} 筆` : ''}`), { direction: 'top' });
+      marker.bindTooltip(create('span', '', group.tooltip), { direction: 'top' });
       markerLookup.set(key, marker);
-      if (!route || activeEntries.length) markerBounds.extend(position);
     }
-    const plans = routes.map((entry) => ({ route: entry, ...display.linePlan(entry, roadData.routes[entry.id], !route || entry.id === route.id ? state.direction : 'all') })).filter((plan) => plan.lines.length);
-    if (route) plans.sort((first, second) => Number(first.route.id === route.id) - Number(second.route.id === route.id));
-    const sources = new Set(plans.map((plan) => plan.source));
-    const lineSource = sources.size === 1 ? plans[0].source : sources.size > 1 ? 'mixed' : 'none';
-    let lineCount = 0;
-    for (const plan of plans) {
-      for (const line of plan.lines) {
-        const active = !route || plan.route.id === route.id;
-        const color = route && active ? directionColors[line.direction] : routeColors.get(plan.route.id);
-        const polyline = L.polyline(line.coordinates, { color, weight: plan.source === 'official' ? route && active ? 4 : 2.5 : 2, opacity: route ? active ? .8 : .33 : .65, dashArray: plan.source === 'official' ? undefined : '5 6', interactive: true }).addTo(lines);
-        polyline.on('click', () => { if (state.activeId !== plan.route.id) selectRoute(plan.route.id); });
-        if (active) lineBounds.extend(polyline.getBounds());
-        lineCount += 1;
-      }
+    for (const path of context.paths) {
+      const polyline = L.polyline(path.coordinates, { ...path.style, interactive: true }).addTo(lines);
+      polyline.on('click', () => dispatch({ type: 'route', routeId: path.routeId, source: 'path' }));
     }
     element('map').dataset.records = currentEntries.length;
-    element('map').dataset.locations = groups.size;
+    element('map').dataset.locations = groups.length;
     element('map').dataset.routes = new Set(currentEntries.map((entry) => entry.route.id)).size;
-    element('map').dataset.lines = lineCount;
-    element('map').dataset.lineSource = lineCount ? lineSource : 'none';
-    element('map').dataset.lineRoutes = plans.length;
-    element('map').dataset.numberedStops = groups.size;
+    element('map').dataset.lines = context.paths.length;
+    element('map').dataset.lineSource = context.lineSource;
+    element('map').dataset.lineRoutes = context.lineRoutes;
+    element('map').dataset.numberedStops = groups.length;
     element('selection-copy').hidden = !route && !state.routeQuery && state.operator === 'all';
     element('selection-title').textContent = route ? route.code : state.routeQuery || state.operator !== 'all' ? '篩選站點' : '全部站點';
     element('selection-summary').textContent = route ? `${route.operators.join(' / ')} · ${format.format(currentEntries.length)} 筆 GPS` : `${new Set(currentEntries.map((entry) => entry.route.id)).size} 條路線 · ${format.format(currentEntries.length)} 筆 GPS`;
     element('clear-route').hidden = !route;
     element('map-empty').hidden = currentEntries.length > 0;
     element('empty-message').textContent = route ? route.points.length ? '此方向沒有可確認 GPS' : statusFor(route).text : '沒有相符站點';
-    const legend = route ? Object.entries(directionLabels).filter(([direction]) => currentEntries.some((entry) => entry.point.direction === direction)).map(([direction, label]) => ({ label, color: directionColors[direction] }))
-      : [];
-    if (currentEntries.some((entry) => entry.point.reviewReasons.length)) legend.push({ label: 'GPS 異常（原值）', color: '#b45309' });
+    const legend = context.legend;
     element('map-legend').hidden = !legend.length;
     element('map-legend').replaceChildren(...legend.map(({ label, color }) => {
       const item = create('span', 'legend-item');
@@ -330,59 +279,53 @@
     updateVisibleMarkers();
   }
 
-  function selectRoute(id, fit = false) {
-    state.activeId = id;
-    state.direction = 'all';
-    state.stopQuery = '';
-    state.stopKey = null;
-    renderSidebar();
-    renderMap(fit);
-  }
-
-  function resetSelection() {
-    state.activeId = null;
-    state.view = 'routes';
-    state.direction = 'all';
-    state.stopKey = null;
-    state.stopQuery = '';
-    renderSidebar();
-    renderMap();
+  function dispatch(action) {
+    const result = selection.transition(state, action);
+    state = result.state;
+    const { effects } = result;
+    if (effects.render !== 'none') renderSidebar();
+    if (effects.render === 'all') renderMap(effects.fit);
+    if (effects.stop) {
+      if (effects.stop.position) map.setView(effects.stop.position, 15, { animate: false });
+      markerLookup.get(effects.stop.key)?.openPopup();
+    }
+    if (effects.searchView) {
+      element('clear-search').hidden = !element('search').value;
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => dispatch({ type: 'search-apply', view: effects.searchView }), 120);
+    }
+    if (effects.focusSearch) element('search').focus();
+    if (effects.district) {
+      const bounds = districtBounds.get(effects.district);
+      if (bounds) map.fitBounds(bounds, { padding: [35, 35], maxZoom: 14, animate: false });
+    }
   }
 
   element('route-list').addEventListener('click', (event) => {
     const button = event.target.closest('[data-route-id]');
-    if (button) selectRoute(button.dataset.routeId, true);
+    if (button) dispatch({ type: 'route', routeId: button.dataset.routeId, source: 'list' });
   });
   element('stop-list').addEventListener('click', (event) => {
     const button = event.target.closest('[data-stop-index]');
     if (!button || button.disabled) return;
     const point = routePoints(selectedRoute())[Number(button.dataset.stopIndex)];
-    state.stopKey = keyFor(point);
-    renderSidebar();
-    map.setView([point.latitude, point.longitude], 15, { animate: false });
-    markerLookup.get(state.stopKey)?.openPopup();
+    dispatch({ type: 'stop', point });
   });
-  for (const button of document.querySelectorAll('[data-view]')) button.addEventListener('click', () => { state.view = button.dataset.view; renderSidebar(); });
-  for (const button of document.querySelectorAll('[data-direction]')) button.addEventListener('click', () => { state.direction = button.dataset.direction; state.stopKey = null; renderSidebar(); renderMap(); });
-  element('search').addEventListener('input', () => {
-    const query = element('search').value;
-    const stationView = state.view === 'stops' && selectedRoute();
-    if (stationView) state.stopQuery = query; else state.routeQuery = query;
-    element('clear-search').hidden = !query;
-    clearTimeout(searchTimer);
-    searchTimer = setTimeout(() => { if (stationView) renderSidebar(); else resetSelection(); }, 120);
-  });
-  element('clear-search').addEventListener('click', () => { if (state.view === 'stops') state.stopQuery = ''; else state.routeQuery = ''; renderSidebar(); if (state.view !== 'stops') renderMap(true); element('search').focus(); });
-  element('operator').addEventListener('change', () => { state.operator = element('operator').value; resetSelection(); });
-  element('reset-filters').addEventListener('click', () => { state.routeQuery = ''; state.operator = 'all'; element('operator').value = 'all'; resetSelection(); });
-  element('back-to-routes').addEventListener('click', resetSelection);
-  element('clear-route').addEventListener('click', resetSelection);
+  for (const button of document.querySelectorAll('[data-view]')) button.addEventListener('click', () => dispatch({ type: 'view', view: button.dataset.view }));
+  for (const button of document.querySelectorAll('[data-direction]')) button.addEventListener('click', () => dispatch({ type: 'direction', direction: button.dataset.direction }));
+  element('search').addEventListener('input', () => dispatch({ type: 'search-input', value: element('search').value }));
+  element('clear-search').addEventListener('click', () => dispatch({ type: 'clear-search' }));
+  element('operator').addEventListener('change', () => dispatch({ type: 'operator', operator: element('operator').value }));
+  element('reset-filters').addEventListener('click', () => dispatch({ type: 'reset-filters' }));
+  element('back-to-routes').addEventListener('click', () => dispatch({ type: 'reset' }));
+  element('clear-route').addEventListener('click', () => dispatch({ type: 'reset' }));
   element('fit-map').addEventListener('click', fitMarkers);
   const districtBounds = new Map();
+  const districtRoutes = routeContext().routes;
   for (const district of ['桃園區', '中壢區', '平鎮區', '八德區', '楊梅區', '蘆竹區', '大溪區', '龍潭區', '龜山區', '大園區', '觀音區', '新屋區', '復興區']) {
     const bounds = L.latLngBounds();
-    for (const route of data.routes) {
-      for (const point of validPoints(route)) {
+    for (const route of districtRoutes) {
+      for (const point of route.mappedPoints) {
         if (point.address?.includes(district) && !point.reviewReasons.length) bounds.extend([point.latitude, point.longitude]);
       }
     }
@@ -393,8 +336,7 @@
     element('district').append(option);
   }
   element('district').addEventListener('change', (event) => {
-    const bounds = districtBounds.get(event.target.value);
-    if (bounds) map.fitBounds(bounds, { padding: [35, 35], maxZoom: 14, animate: false });
+    dispatch({ type: 'district', district: event.target.value });
     event.target.value = '';
   });
   for (const operator of operators) {
