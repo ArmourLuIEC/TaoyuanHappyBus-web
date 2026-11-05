@@ -27,8 +27,6 @@ button, a { color: inherit; }
 .brand-symbol svg { width: 23px; height: 23px; }
 h1 { margin: 0; font-size: 22px; font-weight: 700; line-height: 1.3; }
 h1 span { margin-left: 4px; font-size: 15px; color: var(--green); font-weight: 600; }
-.brand p { margin: 3px 0 0; font-size: 11px; color: var(--muted); }
-.separator { margin: 0 7px; color: #b4c0b8; }
 .selection-actions { display: flex; align-items: center; gap: 7px; flex-shrink: 0; margin-left: auto; }
 .icon-button { width: 34px; height: 34px; flex: 0 0 34px; display: inline-grid; place-items: center; padding: 0; border: 1px solid transparent; border-radius: 5px; background: transparent; text-decoration: none; }
 .icon-button svg { width: 18px; height: 18px; stroke-width: 1.8; }
@@ -56,13 +54,15 @@ select { min-width: 0; flex: 1; height: 35px; padding: 0 8px; border: 1px solid 
 .results-heading { display: flex; align-items: center; height: 40px; padding: 0 18px; flex-shrink: 0; gap: 7px; }
 .results-heading h2 { margin: 0; font-size: 11px; font-weight: 500; color: var(--muted); }
 .results-heading > span { font-size: 11px; color: var(--muted); }
+.results-heading .command-button { margin-left: auto; min-height: 27px; padding: 0 7px; font-size: 11px; }
+.results-heading .command-button svg { width: 14px; height: 14px; }
 .results-heading .icon-button { margin-left: auto; width: 27px; height: 27px; flex-basis: 27px; }
 .result-list { flex: 1; min-height: 0; overflow: auto; scrollbar-width: thin; scrollbar-color: #c7d4cc transparent; }
 .route-row, .stop-row { display: grid; align-items: center; width: 100%; min-height: 62px; text-align: left; padding: 11px 17px; gap: 10px; border: 0; border-bottom: 1px solid #edf1ee; background: transparent; }
 .route-row { grid-template-columns: 87px minmax(0, 1fr); }
 .route-row:hover, .stop-row:hover { background: #f3f7f4; }
 .route-row[aria-pressed="true"] { background: var(--green-soft); box-shadow: inset 3px 0 var(--green); }
-.route-code { font-size: 16px; font-weight: 600; white-space: nowrap; }
+.route-code { padding-left: 6px; border-left: 3px solid var(--route-color); font-size: 16px; font-weight: 600; white-space: nowrap; }
 .row-copy { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
 .row-operator { font-size: 11px; color: var(--muted); overflow-wrap: anywhere; line-height: 1.45; }
 .row-status { display: flex; align-items: center; gap: 5px; font-size: 11px; line-height: 1.4; color: var(--green); }
@@ -115,7 +115,8 @@ select { min-width: 0; flex: 1; height: 35px; padding: 0 8px; border: 1px solid 
 .popup-entry { margin-top: 10px; }
 .popup-entry p { margin: 3px 0; color: var(--muted); font-size: 11px; overflow-wrap: anywhere; }
 .popup-entry .popup-warning { color: #b45309; font-weight: 600; }
-.popup-route { font-weight: 600; color: var(--green); font-size: 12px; }
+.popup-route { border-color: var(--route-color); background: var(--route-color); color: var(--route-text-color); font-weight: 600; font-size: 12px; }
+.popup-route:hover { background: var(--route-color); filter: brightness(.9); }
 .popup-entry a { color: var(--green); font-size: 11px; }
 .popup-list { max-height: 190px; overflow: auto; }
 .map-legend { position: absolute; bottom: 35px; left: 12px; z-index: 500; display: flex; flex-wrap: wrap; gap: 6px 12px; max-width: calc(100% - 55px); padding: 6px 9px; background: #fffffff0; border-radius: 4px; pointer-events: none; }
@@ -135,7 +136,6 @@ select { min-width: 0; flex: 1; height: 35px; padding: 0 8px; border: 1px solid 
   .brand-symbol { width: 32px; height: 32px; }
   .brand-symbol svg { width: 20px; height: 20px; }
   h1 { font-size: 19px; } h1 span { font-size: 12px; }
-  .brand p { font-size: 10px; }
   .app-body { height: calc(100vh - 62px); height: calc(100dvh - 62px); grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(230px, 56%) minmax(180px, 44%); }
   .map-panel { grid-row: 1; }
   .sidebar { grid-row: 2; border-right: 0; border-top: 1px solid var(--border); }

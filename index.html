@@ -18,7 +18,7 @@
   <header class="app-header">
     <div class="brand">
       <span class="brand-symbol" aria-hidden="true"><i data-lucide="bus-front"></i></span>
-      <div><h1>桃小巴 / 幸福巴士 <span>GPS</span></h1><p>官方公車資料 <span class="separator">/</span> <time id="data-date" datetime="2026-11-04">2026.11.04</time></p></div>
+      <h1>桃小巴 / 幸福巴士 <span>GPS</span></h1>
     </div>
   </header>
 
@@ -40,6 +40,7 @@
       </div>
       <div class="results-heading">
         <h2 id="results-title">路線清單</h2><span id="results-count"></span>
+        <button id="back-to-routes" class="command-button" hidden title="返回路線清單"><i data-lucide="arrow-left" aria-hidden="true"></i>返回路線清單</button>
         <button id="reset-filters" class="icon-button" hidden title="重設篩選" aria-label="重設篩選"><i data-lucide="filter-x"></i></button>
       </div>
       <div id="route-list" class="result-list" role="tabpanel" aria-labelledby="routes-tab"></div>

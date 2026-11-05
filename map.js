@@ -10,9 +10,9 @@
   const element = (id) => document.getElementById(id);
   const format = new Intl.NumberFormat('zh-TW');
   const collator = new Intl.Collator('zh-Hant', { numeric: true });
-  const palette = ['#176b54', '#c65d47', '#227b98', '#a17b24', '#665e8b'];
+  const palette = ['#137b49', '#bb3540', '#1767b0', '#ba6100', '#783d99', '#008478', '#b43173', '#695e11'];
   const operators = [...new Set(data.routes.flatMap((route) => route.operators))];
-  const operatorColors = new Map(operators.map((operator, index) => [operator, palette[index % palette.length]]));
+  const routeColors = new Map([...data.routes].sort((first, second) => collator.compare(first.code, second.code)).map((route, index) => [route.id, palette[index % palette.length]]));
   const directionColors = { outbound: '#176b54', inbound: '#c65d47', unspecified: '#227b98' };
   const directionLabels = { outbound: '往程', inbound: '返程', unspecified: '未標方向' };
   const state = { activeId: null, view: 'routes', routeQuery: '', stopQuery: '', operator: 'all', direction: 'all', lines: true, stopKey: null };
@@ -99,6 +99,11 @@
     if (text !== undefined) node.textContent = text;
     return node;
   };
+  const contrastingTextColor = (color) => {
+    const channels = color.slice(1).match(/../g).map((value) => parseInt(value, 16) / 255)
+      .map((value) => value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4);
+    return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2] > 0.179 ? '#000' : '#fff';
+  };
 
   function filteredRoutes() {
     const query = state.routeQuery.trim().toLocaleLowerCase();
@@ -130,6 +135,7 @@
     element('search').value = stationView ? state.stopQuery : state.routeQuery;
     element('clear-search').hidden = !element('search').value;
     element('reset-filters').hidden = stationView || !(state.routeQuery || state.operator !== 'all');
+    element('back-to-routes').hidden = !route;
     element('stop-tab-count').textContent = route ? format.format(route.points.length) : '0';
     if (stationView) {
       const query = state.stopQuery.trim().toLocaleLowerCase();
@@ -161,6 +167,7 @@
       for (const route of routes) {
         const button = create('button', 'route-row');
         button.dataset.routeId = route.id;
+        button.style.setProperty('--route-color', routeColors.get(route.id));
         button.setAttribute('aria-pressed', String(route.id === state.activeId));
         button.title = `${route.code} · ${route.operators.join(' / ')}`;
         button.append(create('span', 'route-code', route.code));
@@ -186,11 +193,25 @@
     for (const { route, point } of group.entries) {
       const entry = create('div', 'popup-entry');
       const routeButton = create('button', 'command-button popup-route', `${route.code} · ${directionLabels[point.direction]}${point.sequence === null ? '' : ` ${point.sequence}`}`);
+      const color = selectedRoute() ? directionColors[point.direction] : routeColors.get(route.id);
+      routeButton.style.setProperty('--route-color', color);
+      routeButton.style.setProperty('--route-text-color', contrastingTextColor(color));
+      routeButton.title = `查看 ${route.code} 路線與站點`;
+      if (globalThis.lucide) {
+        const icon = globalThis.lucide.createElement(globalThis.lucide.ArrowRight);
+        icon.setAttribute('aria-hidden', 'true');
+        routeButton.append(icon);
+      }
       routeButton.addEventListener('click', () => { selectRoute(route.id); state.view = 'stops'; renderSidebar(); });
       entry.append(routeButton);
       entry.append(create('p', '', point.address || '無可核對的站址表地址'));
       if (point.reviewReasons.length) entry.append(create('p', 'popup-warning', '官方座標待確認，保留官方原值'));
       const officialLink = create('a', 'command-button', '官網');
+      if (globalThis.lucide) {
+        const icon = globalThis.lucide.createElement(globalThis.lucide.ArrowUpRight);
+        icon.setAttribute('aria-hidden', 'true');
+        officialLink.append(icon);
+      }
       officialLink.href = `https://ebus.tycg.gov.tw/ebus/driving-map/${route.id}`;
       officialLink.target = '_blank';
       officialLink.rel = 'noopener';
@@ -223,7 +244,7 @@
     }
     for (const [key, group] of groups) {
       const needsReview = group.entries.some((entry) => entry.point.reviewReasons.length);
-      const color = needsReview ? '#b45309' : route ? directionColors[group.point.direction] : operatorColors.get(group.entries[0].route.operators[0]);
+      const color = needsReview ? '#b45309' : route ? directionColors[group.point.direction] : routeColors.get(group.entries[0].route.id);
       const position = [group.point.latitude, group.point.longitude];
       const label = display.sequenceLabel(group.entries);
       const badge = create('span', `stop-label${needsReview ? ' stop-label-warning' : ''}${label.text.length > 3 ? ' stop-label-shared' : ''}`, label.text);
@@ -249,7 +270,7 @@
     if (state.lines) {
       for (const plan of plans) {
         for (const line of plan.lines) {
-          const color = route ? directionColors[line.direction] : operatorColors.get(plan.route.operators[0]);
+          const color = route ? directionColors[line.direction] : routeColors.get(plan.route.id);
           L.polyline(line.coordinates, { color, weight: plan.source === 'official' ? route ? 4 : 2.5 : 2, opacity: route ? .8 : .65, dashArray: plan.source === 'official' ? undefined : '5 6', interactive: false }).addTo(lines);
           lineCount += 1;
         }
@@ -268,10 +289,10 @@
     element('clear-route').hidden = !route;
     element('map-empty').hidden = currentEntries.length > 0;
     element('empty-message').textContent = route ? route.points.length ? '此方向沒有可確認 GPS' : statusFor(route).text : '沒有相符站點';
-    element('map-legend').hidden = !currentEntries.length;
     const legend = route ? Object.entries(directionLabels).filter(([direction]) => currentEntries.some((entry) => entry.point.direction === direction)).map(([direction, label]) => ({ label, color: directionColors[direction] }))
-      : operators.map((operator) => ({ label: operator.replace('(9人座)', ''), color: operatorColors.get(operator) }));
+      : [];
     if (currentEntries.some((entry) => entry.point.reviewReasons.length)) legend.push({ label: 'GPS 異常（原值）', color: '#b45309' });
+    element('map-legend').hidden = !legend.length;
     element('map-legend').replaceChildren(...legend.map(({ label, color }) => {
       const item = create('span', 'legend-item');
       const swatch = create('span', 'legend-swatch');
@@ -332,6 +353,7 @@
   element('clear-search').addEventListener('click', () => { if (state.view === 'stops') state.stopQuery = ''; else state.routeQuery = ''; renderSidebar(); if (state.view !== 'stops') renderMap(true); element('search').focus(); });
   element('operator').addEventListener('change', () => { state.operator = element('operator').value; resetSelection(); });
   element('reset-filters').addEventListener('click', () => { state.routeQuery = ''; state.operator = 'all'; element('operator').value = 'all'; resetSelection(); });
+  element('back-to-routes').addEventListener('click', resetSelection);
   element('clear-route').addEventListener('click', resetSelection);
   element('fit-map').addEventListener('click', fitMarkers);
   element('connect-stops').addEventListener('change', () => { state.lines = element('connect-stops').checked; renderMap(); });
@@ -341,11 +363,6 @@
     element('operator').append(option);
   }
   element('data-summary').textContent = `官方座標 ${format.format(data.stats.officialStops || 0)} 筆 · ${data.stats.missingPDFs} 條原表缺檔 · ${data.stats.reviewStops} 筆官方 GPS 待確認`;
-  const date = data.routes[0]?.retrievedAt?.slice(0, 10);
-  if (date && element('data-date')) {
-    element('data-date').dateTime = date;
-    element('data-date').textContent = date.replaceAll('-', '.');
-  }
   globalThis.lucide?.createIcons({ attrs: { 'aria-hidden': 'true' } });
   renderSidebar();
   renderMap(true);
