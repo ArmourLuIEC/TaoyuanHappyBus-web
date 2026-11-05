@@ -1,0 +1,2720 @@
+{
+  "routes": [
+    {
+      "id": "50272",
+      "code": "5027B",
+      "operators": [
+        "桃園客運",
+        "捷乘客運"
+      ],
+      "pdf": "stop-addresses/5027B_50272.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/50272",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/50272/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [
+        {
+          "page": 1,
+          "unmatchedCoordinates": 1
+        }
+      ],
+      "pageCount": 1,
+      "officialStopCount": 92,
+      "matchedOriginalStops": 88,
+      "officialOnlyStops": 4,
+      "unmatchedOriginalStops": 3,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 88
+      },
+      "stopCount": 92
+    },
+    {
+      "id": "5120",
+      "code": "T512",
+      "operators": [
+        "桃園客運"
+      ],
+      "pdf": "stop-addresses/T512_5120.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/5120",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/5120/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 32,
+      "matchedOriginalStops": 28,
+      "officialOnlyStops": 4,
+      "unmatchedOriginalStops": 4,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 28
+      },
+      "stopCount": 32
+    },
+    {
+      "id": "5121",
+      "code": "T512A",
+      "operators": [
+        "桃園客運"
+      ],
+      "pdf": "stop-addresses/T512A_5121.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/5121",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/5121/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 4,
+      "matchedOriginalStops": 4,
+      "officialOnlyStops": 0,
+      "unmatchedOriginalStops": 0,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 4
+      },
+      "stopCount": 4
+    },
+    {
+      "id": "5162",
+      "code": "T516B",
+      "operators": [
+        "桃園客運"
+      ],
+      "pdf": "stop-addresses/T516B_5162.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/5162",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/5162/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 83,
+      "matchedOriginalStops": 82,
+      "officialOnlyStops": 1,
+      "unmatchedOriginalStops": 1,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 82
+      },
+      "stopCount": 83
+    },
+    {
+      "id": "57120",
+      "code": "L712",
+      "operators": [
+        "桃園客運",
+        "捷乘客運"
+      ],
+      "pdf": "stop-addresses/L712_57120.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/57120",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/57120/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 58,
+      "matchedOriginalStops": 58,
+      "officialOnlyStops": 0,
+      "unmatchedOriginalStops": 1,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 58
+      },
+      "stopCount": 58
+    },
+    {
+      "id": "9010",
+      "code": "F901",
+      "operators": [
+        "桃園客運"
+      ],
+      "pdf": "stop-addresses/F901_9010.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/9010",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/9010/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 70,
+      "matchedOriginalStops": 64,
+      "officialOnlyStops": 6,
+      "unmatchedOriginalStops": 6,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 64
+      },
+      "stopCount": 70
+    },
+    {
+      "id": "9018",
+      "code": "F901A",
+      "operators": [
+        "桃園客運"
+      ],
+      "pdf": "stop-addresses/F901A_9018.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/9018",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/9018/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 63,
+      "matchedOriginalStops": 53,
+      "officialOnlyStops": 10,
+      "unmatchedOriginalStops": 9,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 53
+      },
+      "stopCount": 63
+    },
+    {
+      "id": "9060",
+      "code": "F906",
+      "operators": [
+        "桃園客運"
+      ],
+      "pdf": "stop-addresses/F906_9060.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/9060",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/9060/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 76,
+      "matchedOriginalStops": 68,
+      "officialOnlyStops": 8,
+      "unmatchedOriginalStops": 8,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 68
+      },
+      "stopCount": 76
+    },
+    {
+      "id": "227",
+      "code": "227",
+      "operators": [
+        "捷乘客運"
+      ],
+      "pdf": "stop-addresses/227_227.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/227",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/227/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 52,
+      "matchedOriginalStops": 49,
+      "officialOnlyStops": 3,
+      "unmatchedOriginalStops": 3,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 49
+      },
+      "stopCount": 52
+    },
+    {
+      "id": "2272",
+      "code": "227A",
+      "operators": [
+        "捷乘客運"
+      ],
+      "pdf": "stop-addresses/227A_2272.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/2272",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/2272/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 53,
+      "matchedOriginalStops": 50,
+      "officialOnlyStops": 3,
+      "unmatchedOriginalStops": 3,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 50
+      },
+      "stopCount": 53
+    },
+    {
+      "id": "50273",
+      "code": "5027C",
+      "operators": [
+        "捷乘客運"
+      ],
+      "pdf": "stop-addresses/5027C_50273.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/50273",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/50273/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [
+        {
+          "page": 1,
+          "unmatchedCoordinates": 1
+        }
+      ],
+      "pageCount": 1,
+      "officialStopCount": 102,
+      "matchedOriginalStops": 96,
+      "officialOnlyStops": 6,
+      "unmatchedOriginalStops": 5,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 96
+      },
+      "stopCount": 102
+    },
+    {
+      "id": "5028",
+      "code": "5028",
+      "operators": [
+        "捷乘客運"
+      ],
+      "pdf": "stop-addresses/5028_5028.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/5028",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/5028/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 54,
+      "matchedOriginalStops": 51,
+      "officialOnlyStops": 3,
+      "unmatchedOriginalStops": 3,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 51
+      },
+      "stopCount": 54
+    },
+    {
+      "id": "50311",
+      "code": "5031A",
+      "operators": [
+        "捷乘客運"
+      ],
+      "pdf": "stop-addresses/5031A_50311.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/50311",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/50311/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 54,
+      "matchedOriginalStops": 27,
+      "officialOnlyStops": 27,
+      "unmatchedOriginalStops": 27,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 27
+      },
+      "stopCount": 54
+    },
+    {
+      "id": "5083",
+      "code": "5083",
+      "operators": [
+        "捷乘客運"
+      ],
+      "pdf": "stop-addresses/5083_5083.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/5083",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/5083/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 35,
+      "matchedOriginalStops": 35,
+      "officialOnlyStops": 0,
+      "unmatchedOriginalStops": 0,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 35
+      },
+      "stopCount": 35
+    },
+    {
+      "id": "5084",
+      "code": "5084",
+      "operators": [
+        "捷乘客運"
+      ],
+      "pdf": "stop-addresses/5084_5084.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/5084",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/5084/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 54,
+      "matchedOriginalStops": 27,
+      "officialOnlyStops": 27,
+      "unmatchedOriginalStops": 27,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 27
+      },
+      "stopCount": 54
+    },
+    {
+      "id": "5085",
+      "code": "5085",
+      "operators": [
+        "捷乘客運"
+      ],
+      "pdf": "stop-addresses/5085_5085.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/5085",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/5085/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 40,
+      "matchedOriginalStops": 38,
+      "officialOnlyStops": 2,
+      "unmatchedOriginalStops": 2,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 38
+      },
+      "stopCount": 40
+    },
+    {
+      "id": "5097",
+      "code": "5097",
+      "operators": [
+        "捷乘客運"
+      ],
+      "pdf": "stop-addresses/5097_5097.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/5097",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/5097/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 46,
+      "matchedOriginalStops": 46,
+      "officialOnlyStops": 0,
+      "unmatchedOriginalStops": 0,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 46
+      },
+      "stopCount": 46
+    },
+    {
+      "id": "7100",
+      "code": "T100A",
+      "operators": [
+        "捷乘客運"
+      ],
+      "pdf": "stop-addresses/T100A_7100.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7100",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7100/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 56,
+      "matchedOriginalStops": 43,
+      "officialOnlyStops": 13,
+      "unmatchedOriginalStops": 13,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 43
+      },
+      "stopCount": 56
+    },
+    {
+      "id": "51150",
+      "code": "L115",
+      "operators": [
+        "捷乘客運"
+      ],
+      "pdf": "stop-addresses/L115_51150.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/51150",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/51150/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 76,
+      "matchedOriginalStops": 69,
+      "officialOnlyStops": 7,
+      "unmatchedOriginalStops": 4,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 69
+      },
+      "stopCount": 76
+    },
+    {
+      "id": "51170",
+      "code": "L117",
+      "operators": [
+        "捷乘客運"
+      ],
+      "pdf": "stop-addresses/L117_51170.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/51170",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/51170/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 76,
+      "matchedOriginalStops": 65,
+      "officialOnlyStops": 11,
+      "unmatchedOriginalStops": 8,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 65
+      },
+      "stopCount": 76
+    },
+    {
+      "id": "51210",
+      "code": "L121",
+      "operators": [
+        "捷乘客運"
+      ],
+      "pdf": "stop-addresses/L121_51210.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/51210",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/51210/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 77,
+      "matchedOriginalStops": 66,
+      "officialOnlyStops": 11,
+      "unmatchedOriginalStops": 11,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 66
+      },
+      "stopCount": 77
+    },
+    {
+      "id": "3100",
+      "code": "T310",
+      "operators": [
+        "捷乘客運"
+      ],
+      "pdf": "stop-addresses/T310_3100.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/3100",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/3100/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 6,
+      "matchedOriginalStops": 6,
+      "officialOnlyStops": 0,
+      "unmatchedOriginalStops": 0,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 6
+      },
+      "stopCount": 6
+    },
+    {
+      "id": "3",
+      "code": "T700",
+      "operators": [
+        "捷乘客運"
+      ],
+      "pdf": "stop-addresses/T700_3.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/3",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/3/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 28,
+      "matchedOriginalStops": 28,
+      "officialOnlyStops": 0,
+      "unmatchedOriginalStops": 0,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 28
+      },
+      "stopCount": 28
+    },
+    {
+      "id": "7",
+      "code": "T720",
+      "operators": [
+        "捷乘客運"
+      ],
+      "pdf": "stop-addresses/T720_7.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 9,
+      "matchedOriginalStops": 9,
+      "officialOnlyStops": 0,
+      "unmatchedOriginalStops": 0,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 9
+      },
+      "stopCount": 9
+    },
+    {
+      "id": "8",
+      "code": "T720A",
+      "operators": [
+        "捷乘客運"
+      ],
+      "pdf": "stop-addresses/T720A_8.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/8",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/8/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 9,
+      "matchedOriginalStops": 9,
+      "officialOnlyStops": 0,
+      "unmatchedOriginalStops": 0,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 9
+      },
+      "stopCount": 9
+    },
+    {
+      "id": "4",
+      "code": "T721",
+      "operators": [
+        "捷乘客運"
+      ],
+      "pdf": "stop-addresses/T721_4.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/4",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/4/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [
+        {
+          "page": 1,
+          "unmatchedCoordinates": 5
+        }
+      ],
+      "pageCount": 1,
+      "officialStopCount": 86,
+      "matchedOriginalStops": 10,
+      "officialOnlyStops": 76,
+      "unmatchedOriginalStops": 9,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 10
+      },
+      "stopCount": 86
+    },
+    {
+      "id": "5",
+      "code": "T722",
+      "operators": [
+        "捷乘客運"
+      ],
+      "pdf": "stop-addresses/T722_5.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/5",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/5/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [
+        {
+          "page": 1,
+          "unmatchedCoordinates": 2
+        }
+      ],
+      "pageCount": 1,
+      "officialStopCount": 62,
+      "matchedOriginalStops": 1,
+      "officialOnlyStops": 61,
+      "unmatchedOriginalStops": 3,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 1
+      },
+      "stopCount": 62
+    },
+    {
+      "id": "7801",
+      "code": "T801",
+      "operators": [
+        "捷乘客運"
+      ],
+      "pdf": "stop-addresses/T801_7801.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7801",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7801/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [
+        {
+          "page": 1,
+          "unmatchedCoordinates": 31
+        }
+      ],
+      "pageCount": 1,
+      "officialStopCount": 132,
+      "matchedOriginalStops": 58,
+      "officialOnlyStops": 74,
+      "unmatchedOriginalStops": 12,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 58
+      },
+      "stopCount": 132
+    },
+    {
+      "id": "2",
+      "code": "F908",
+      "operators": [
+        "捷乘客運"
+      ],
+      "pdf": "stop-addresses/F908_2.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/2",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/2/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 20,
+      "matchedOriginalStops": 19,
+      "officialOnlyStops": 1,
+      "unmatchedOriginalStops": 1,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 19
+      },
+      "stopCount": 20
+    },
+    {
+      "id": "56520",
+      "code": "5650B",
+      "operators": [
+        "亞通客運"
+      ],
+      "pdf": "stop-addresses/5650B_56520.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/56520",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/56520/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 40,
+      "matchedOriginalStops": 40,
+      "officialOnlyStops": 0,
+      "unmatchedOriginalStops": 0,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 40
+      },
+      "stopCount": 40
+    },
+    {
+      "id": "7600",
+      "code": "T600",
+      "operators": [
+        "亞通客運"
+      ],
+      "pdf": "stop-addresses/T600_7600.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7600",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7600/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 22,
+      "matchedOriginalStops": 18,
+      "officialOnlyStops": 4,
+      "unmatchedOriginalStops": 4,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 18
+      },
+      "stopCount": 22
+    },
+    {
+      "id": "7601",
+      "code": "T601",
+      "operators": [
+        "亞通客運"
+      ],
+      "pdf": "stop-addresses/T601_7601.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7601",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7601/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 48,
+      "matchedOriginalStops": 43,
+      "officialOnlyStops": 5,
+      "unmatchedOriginalStops": 5,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 43
+      },
+      "stopCount": 48
+    },
+    {
+      "id": "7602",
+      "code": "T602",
+      "operators": [
+        "亞通客運"
+      ],
+      "pdf": "stop-addresses/T602_7602.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7602",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7602/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 29,
+      "matchedOriginalStops": 28,
+      "officialOnlyStops": 1,
+      "unmatchedOriginalStops": 1,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 28
+      },
+      "stopCount": 29
+    },
+    {
+      "id": "7520",
+      "code": "T520",
+      "operators": [
+        "亞通客運"
+      ],
+      "pdf": "stop-addresses/T520_7520.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7520",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7520/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 40,
+      "matchedOriginalStops": 36,
+      "officialOnlyStops": 4,
+      "unmatchedOriginalStops": 4,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 36
+      },
+      "stopCount": 40
+    },
+    {
+      "id": "7603",
+      "code": "T603",
+      "operators": [
+        "亞通客運"
+      ],
+      "pdf": "stop-addresses/T603_7603.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7603",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7603/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 50,
+      "matchedOriginalStops": 20,
+      "officialOnlyStops": 30,
+      "unmatchedOriginalStops": 0,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 20
+      },
+      "stopCount": 50
+    },
+    {
+      "id": "220",
+      "code": "T220",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T220_220.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/220",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/220/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 24,
+      "matchedOriginalStops": 16,
+      "officialOnlyStops": 8,
+      "unmatchedOriginalStops": 8,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 16
+      },
+      "stopCount": 24
+    },
+    {
+      "id": "221",
+      "code": "T221",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T221_221.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/221",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/221/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 36,
+      "matchedOriginalStops": 17,
+      "officialOnlyStops": 19,
+      "unmatchedOriginalStops": 18,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 17
+      },
+      "stopCount": 36
+    },
+    {
+      "id": "1030",
+      "code": "T103",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T103_1030.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/1030",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/1030/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 84,
+      "matchedOriginalStops": 81,
+      "officialOnlyStops": 3,
+      "unmatchedOriginalStops": 3,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 81
+      },
+      "stopCount": 84
+    },
+    {
+      "id": "1040",
+      "code": "T104",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T104_1040.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/1040",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/1040/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 81,
+      "matchedOriginalStops": 70,
+      "officialOnlyStops": 11,
+      "unmatchedOriginalStops": 11,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 70
+      },
+      "stopCount": 81
+    },
+    {
+      "id": "7101",
+      "code": "T101",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T101_7101.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7101",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7101/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 25,
+      "matchedOriginalStops": 23,
+      "officialOnlyStops": 2,
+      "unmatchedOriginalStops": 2,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 23
+      },
+      "stopCount": 25
+    },
+    {
+      "id": "7201",
+      "code": "T201",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T201_7201.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7201",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7201/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 17,
+      "matchedOriginalStops": 17,
+      "officialOnlyStops": 0,
+      "unmatchedOriginalStops": 0,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 17
+      },
+      "stopCount": 17
+    },
+    {
+      "id": "7202",
+      "code": "T202",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T202_7202.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7202",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7202/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 22,
+      "matchedOriginalStops": 22,
+      "officialOnlyStops": 0,
+      "unmatchedOriginalStops": 0,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 22
+      },
+      "stopCount": 22
+    },
+    {
+      "id": "7203",
+      "code": "T203",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T203_7203.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7203",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7203/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 22,
+      "matchedOriginalStops": 22,
+      "officialOnlyStops": 0,
+      "unmatchedOriginalStops": 0,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 22
+      },
+      "stopCount": 22
+    },
+    {
+      "id": "7204",
+      "code": "T204",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T204_7204.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7204",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7204/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 24,
+      "matchedOriginalStops": 24,
+      "officialOnlyStops": 0,
+      "unmatchedOriginalStops": 0,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 24
+      },
+      "stopCount": 24
+    },
+    {
+      "id": "7222",
+      "code": "T222",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T222_7222.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7222",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7222/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 19,
+      "matchedOriginalStops": 19,
+      "officialOnlyStops": 0,
+      "unmatchedOriginalStops": 0,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 19
+      },
+      "stopCount": 19
+    },
+    {
+      "id": "7223",
+      "code": "T223",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T223_7223.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7223",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7223/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 23,
+      "matchedOriginalStops": 20,
+      "officialOnlyStops": 3,
+      "unmatchedOriginalStops": 3,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 20
+      },
+      "stopCount": 23
+    },
+    {
+      "id": "7224",
+      "code": "T224",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T224_7224.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7224",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7224/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 47,
+      "matchedOriginalStops": 37,
+      "officialOnlyStops": 10,
+      "unmatchedOriginalStops": 10,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 37
+      },
+      "stopCount": 47
+    },
+    {
+      "id": "1020",
+      "code": "T102",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T102_1020.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/1020",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/1020/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 33,
+      "matchedOriginalStops": 28,
+      "officialOnlyStops": 5,
+      "unmatchedOriginalStops": 5,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 28
+      },
+      "stopCount": 33
+    },
+    {
+      "id": "1050",
+      "code": "T105",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T105_1050.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/1050",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/1050/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 26,
+      "matchedOriginalStops": 25,
+      "officialOnlyStops": 1,
+      "unmatchedOriginalStops": 1,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 25
+      },
+      "stopCount": 26
+    },
+    {
+      "id": "7120",
+      "code": "T120",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T120_7120.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7120",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7120/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 27,
+      "matchedOriginalStops": 27,
+      "officialOnlyStops": 0,
+      "unmatchedOriginalStops": 0,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 27
+      },
+      "stopCount": 27
+    },
+    {
+      "id": "1210",
+      "code": "T121",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T121_1210.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/1210",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/1210/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 21,
+      "matchedOriginalStops": 21,
+      "officialOnlyStops": 0,
+      "unmatchedOriginalStops": 0,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 21
+      },
+      "stopCount": 21
+    },
+    {
+      "id": "7122",
+      "code": "T122",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T122_7122.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7122",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7122/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [
+        {
+          "page": 1,
+          "unmatchedCoordinates": 2
+        }
+      ],
+      "pageCount": 2,
+      "officialStopCount": 15,
+      "matchedOriginalStops": 11,
+      "officialOnlyStops": 4,
+      "unmatchedOriginalStops": 3,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 11
+      },
+      "stopCount": 15
+    },
+    {
+      "id": "7123",
+      "code": "T123",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T123_7123.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7123",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7123/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 21,
+      "matchedOriginalStops": 20,
+      "officialOnlyStops": 1,
+      "unmatchedOriginalStops": 1,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 20
+      },
+      "stopCount": 21
+    },
+    {
+      "id": "7300",
+      "code": "T300",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": null,
+      "pdfStatus": "missing",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7300",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7300/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 0,
+      "officialStopCount": 37,
+      "matchedOriginalStops": 0,
+      "officialOnlyStops": 37,
+      "unmatchedOriginalStops": 0,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 0
+      },
+      "stopCount": 37
+    },
+    {
+      "id": "7301",
+      "code": "T301",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T301_7301.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7301",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7301/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 15,
+      "matchedOriginalStops": 14,
+      "officialOnlyStops": 1,
+      "unmatchedOriginalStops": 1,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 14
+      },
+      "stopCount": 15
+    },
+    {
+      "id": "7320",
+      "code": "T320",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T320_7320.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7320",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7320/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 44,
+      "matchedOriginalStops": 43,
+      "officialOnlyStops": 1,
+      "unmatchedOriginalStops": 1,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 43
+      },
+      "stopCount": 44
+    },
+    {
+      "id": "7321",
+      "code": "T321",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T321_7321.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7321",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7321/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 34,
+      "matchedOriginalStops": 29,
+      "officialOnlyStops": 5,
+      "unmatchedOriginalStops": 1,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 29
+      },
+      "stopCount": 34
+    },
+    {
+      "id": "7322",
+      "code": "T322",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T322_7322.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7322",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7322/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 2,
+      "officialStopCount": 10,
+      "matchedOriginalStops": 8,
+      "officialOnlyStops": 2,
+      "unmatchedOriginalStops": 0,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 8
+      },
+      "stopCount": 10
+    },
+    {
+      "id": "7621",
+      "code": "T621",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T621_7621.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7621",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7621/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 34,
+      "matchedOriginalStops": 32,
+      "officialOnlyStops": 2,
+      "unmatchedOriginalStops": 2,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 32
+      },
+      "stopCount": 34
+    },
+    {
+      "id": "7622",
+      "code": "T622",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T622_7622.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7622",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7622/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 34,
+      "matchedOriginalStops": 34,
+      "officialOnlyStops": 0,
+      "unmatchedOriginalStops": 0,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 34
+      },
+      "stopCount": 34
+    },
+    {
+      "id": "7623",
+      "code": "T623",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T623_7623.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7623",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7623/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 36,
+      "matchedOriginalStops": 32,
+      "officialOnlyStops": 4,
+      "unmatchedOriginalStops": 4,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 32
+      },
+      "stopCount": 36
+    },
+    {
+      "id": "7624",
+      "code": "T624",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T624_7624.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7624",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7624/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 18,
+      "matchedOriginalStops": 16,
+      "officialOnlyStops": 2,
+      "unmatchedOriginalStops": 2,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 16
+      },
+      "stopCount": 18
+    },
+    {
+      "id": "7625",
+      "code": "T625",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T625_7625.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7625",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7625/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 54,
+      "matchedOriginalStops": 48,
+      "officialOnlyStops": 6,
+      "unmatchedOriginalStops": 6,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 48
+      },
+      "stopCount": 54
+    },
+    {
+      "id": "7804",
+      "code": "T804",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T804_7804.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7804",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7804/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 16,
+      "matchedOriginalStops": 16,
+      "officialOnlyStops": 0,
+      "unmatchedOriginalStops": 0,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 16
+      },
+      "stopCount": 16
+    },
+    {
+      "id": "7805",
+      "code": "T805",
+      "operators": [
+        "九億租車"
+      ],
+      "pdf": "stop-addresses/T805_7805.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7805",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7805/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 22,
+      "matchedOriginalStops": 22,
+      "officialOnlyStops": 0,
+      "unmatchedOriginalStops": 0,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 22
+      },
+      "stopCount": 22
+    },
+    {
+      "id": "50172",
+      "code": "5017B",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/5017B_50172.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/50172",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/50172/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 96,
+      "matchedOriginalStops": 94,
+      "officialOnlyStops": 2,
+      "unmatchedOriginalStops": 2,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 94
+      },
+      "stopCount": 96
+    },
+    {
+      "id": "50813",
+      "code": "5081C",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/5081C_50813.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/50813",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/50813/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 45,
+      "matchedOriginalStops": 43,
+      "officialOnlyStops": 2,
+      "unmatchedOriginalStops": 2,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 43
+      },
+      "stopCount": 45
+    },
+    {
+      "id": "50901",
+      "code": "F912",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/F912_50901.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/50901",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/50901/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 75,
+      "matchedOriginalStops": 69,
+      "officialOnlyStops": 6,
+      "unmatchedOriginalStops": 6,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 69
+      },
+      "stopCount": 75
+    },
+    {
+      "id": "5106",
+      "code": "F913",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/F913_5106.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/5106",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/5106/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 96,
+      "matchedOriginalStops": 92,
+      "officialOnlyStops": 4,
+      "unmatchedOriginalStops": 4,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 92
+      },
+      "stopCount": 96
+    },
+    {
+      "id": "51061",
+      "code": "F913A",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/F913A_51061.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/51061",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/51061/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 57,
+      "matchedOriginalStops": 55,
+      "officialOnlyStops": 2,
+      "unmatchedOriginalStops": 2,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 55
+      },
+      "stopCount": 57
+    },
+    {
+      "id": "51062",
+      "code": "F913B",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/F913B_51062.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/51062",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/51062/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 59,
+      "matchedOriginalStops": 51,
+      "officialOnlyStops": 8,
+      "unmatchedOriginalStops": 8,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 51
+      },
+      "stopCount": 59
+    },
+    {
+      "id": "7200",
+      "code": "T200",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/T200_7200.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/7200",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/7200/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 6,
+      "matchedOriginalStops": 2,
+      "officialOnlyStops": 4,
+      "unmatchedOriginalStops": 4,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 2
+      },
+      "stopCount": 6
+    },
+    {
+      "id": "5127",
+      "code": "T512(真好)",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/T512(真好)_5127.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/5127",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/5127/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 32,
+      "matchedOriginalStops": 28,
+      "officialOnlyStops": 4,
+      "unmatchedOriginalStops": 4,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 28
+      },
+      "stopCount": 32
+    },
+    {
+      "id": "5130",
+      "code": "T513",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/T513_5130.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/5130",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/5130/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 64,
+      "matchedOriginalStops": 57,
+      "officialOnlyStops": 7,
+      "unmatchedOriginalStops": 7,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 57
+      },
+      "stopCount": 64
+    },
+    {
+      "id": "5150",
+      "code": "T515",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/T515_5150.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/5150",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/5150/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 32,
+      "matchedOriginalStops": 20,
+      "officialOnlyStops": 12,
+      "unmatchedOriginalStops": 10,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 20
+      },
+      "stopCount": 32
+    },
+    {
+      "id": "5160",
+      "code": "T516",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/T516_5160.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/5160",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/5160/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 2,
+      "officialStopCount": 66,
+      "matchedOriginalStops": 64,
+      "officialOnlyStops": 2,
+      "unmatchedOriginalStops": 2,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 64
+      },
+      "stopCount": 66
+    },
+    {
+      "id": "5161",
+      "code": "T516A",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/T516A_5161.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/5161",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/5161/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 94,
+      "matchedOriginalStops": 92,
+      "officialOnlyStops": 2,
+      "unmatchedOriginalStops": 2,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 92
+      },
+      "stopCount": 94
+    },
+    {
+      "id": "5170",
+      "code": "T517",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/T517_5170.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/5170",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/5170/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 91,
+      "matchedOriginalStops": 85,
+      "officialOnlyStops": 6,
+      "unmatchedOriginalStops": 6,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 85
+      },
+      "stopCount": 91
+    },
+    {
+      "id": "5171",
+      "code": "T517A",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/T517A_5171.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/5171",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/5171/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 97,
+      "matchedOriginalStops": 91,
+      "officialOnlyStops": 6,
+      "unmatchedOriginalStops": 6,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 91
+      },
+      "stopCount": 97
+    },
+    {
+      "id": "5180",
+      "code": "T518",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/T518_5180.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/5180",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/5180/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 27,
+      "matchedOriginalStops": 24,
+      "officialOnlyStops": 3,
+      "unmatchedOriginalStops": 2,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 24
+      },
+      "stopCount": 27
+    },
+    {
+      "id": "5190",
+      "code": "T519",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/T519_5190.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/5190",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/5190/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 122,
+      "matchedOriginalStops": 117,
+      "officialOnlyStops": 5,
+      "unmatchedOriginalStops": 5,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 117
+      },
+      "stopCount": 122
+    },
+    {
+      "id": "6200",
+      "code": "T620",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/T620_6200.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/6200",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/6200/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 64,
+      "matchedOriginalStops": 57,
+      "officialOnlyStops": 7,
+      "unmatchedOriginalStops": 7,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 57
+      },
+      "stopCount": 64
+    },
+    {
+      "id": "8020",
+      "code": "T802",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/T802_8020.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/8020",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/8020/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 48,
+      "matchedOriginalStops": 44,
+      "officialOnlyStops": 4,
+      "unmatchedOriginalStops": 4,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 44
+      },
+      "stopCount": 48
+    },
+    {
+      "id": "8030",
+      "code": "T803",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/T803_8030.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/8030",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/8030/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 13,
+      "matchedOriginalStops": 11,
+      "officialOnlyStops": 2,
+      "unmatchedOriginalStops": 1,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 11
+      },
+      "stopCount": 13
+    },
+    {
+      "id": "8080",
+      "code": "T808",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/T808_8080.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/8080",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/8080/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 43,
+      "matchedOriginalStops": 0,
+      "officialOnlyStops": 43,
+      "unmatchedOriginalStops": 43,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 0
+      },
+      "stopCount": 43
+    },
+    {
+      "id": "9020",
+      "code": "F902",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/F902_9020.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/9020",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/9020/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 88,
+      "matchedOriginalStops": 81,
+      "officialOnlyStops": 7,
+      "unmatchedOriginalStops": 7,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 81
+      },
+      "stopCount": 88
+    },
+    {
+      "id": "9021",
+      "code": "F902A",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/F902A_9021.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/9021",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/9021/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 74,
+      "matchedOriginalStops": 47,
+      "officialOnlyStops": 27,
+      "unmatchedOriginalStops": 27,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 47
+      },
+      "stopCount": 74
+    },
+    {
+      "id": "901",
+      "code": "F901(真好)",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/F901(真好)_901.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/901",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/901/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 86,
+      "matchedOriginalStops": 55,
+      "officialOnlyStops": 31,
+      "unmatchedOriginalStops": 31,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 55
+      },
+      "stopCount": 86
+    },
+    {
+      "id": "9022",
+      "code": "F902B",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/F902B_9022.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/9022",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/9022/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 94,
+      "matchedOriginalStops": 75,
+      "officialOnlyStops": 19,
+      "unmatchedOriginalStops": 19,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 75
+      },
+      "stopCount": 94
+    },
+    {
+      "id": "9023",
+      "code": "F902C",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/F902C_9023.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/9023",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/9023/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 80,
+      "matchedOriginalStops": 65,
+      "officialOnlyStops": 15,
+      "unmatchedOriginalStops": 15,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 65
+      },
+      "stopCount": 80
+    },
+    {
+      "id": "9024",
+      "code": "F902D",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/F902D_9024.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/9024",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/9024/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 84,
+      "matchedOriginalStops": 61,
+      "officialOnlyStops": 23,
+      "unmatchedOriginalStops": 23,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 61
+      },
+      "stopCount": 84
+    },
+    {
+      "id": "9027",
+      "code": "F902G",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/F902G_9027.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/9027",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/9027/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 34,
+      "matchedOriginalStops": 17,
+      "officialOnlyStops": 17,
+      "unmatchedOriginalStops": 17,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 17
+      },
+      "stopCount": 34
+    },
+    {
+      "id": "9034",
+      "code": "F903",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/F903_9034.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/9034",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/9034/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 30,
+      "matchedOriginalStops": 16,
+      "officialOnlyStops": 14,
+      "unmatchedOriginalStops": 14,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 16
+      },
+      "stopCount": 30
+    },
+    {
+      "id": "9035",
+      "code": "F903A",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/F903A_9035.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/9035",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/9035/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 26,
+      "matchedOriginalStops": 13,
+      "officialOnlyStops": 13,
+      "unmatchedOriginalStops": 13,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 13
+      },
+      "stopCount": 26
+    },
+    {
+      "id": "9036",
+      "code": "F903E",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/F903E_9036.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/9036",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/9036/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 41,
+      "matchedOriginalStops": 0,
+      "officialOnlyStops": 41,
+      "unmatchedOriginalStops": 41,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 0
+      },
+      "stopCount": 41
+    },
+    {
+      "id": "9037",
+      "code": "F903F",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/F903F_9037.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/9037",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/9037/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 38,
+      "matchedOriginalStops": 23,
+      "officialOnlyStops": 15,
+      "unmatchedOriginalStops": 14,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 23
+      },
+      "stopCount": 38
+    },
+    {
+      "id": "9050",
+      "code": "F905",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/F905_9050.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/9050",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/9050/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 68,
+      "matchedOriginalStops": 47,
+      "officialOnlyStops": 21,
+      "unmatchedOriginalStops": 21,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 47
+      },
+      "stopCount": 68
+    },
+    {
+      "id": "9051",
+      "code": "F905A",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/F905A_9051.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/9051",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/9051/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 36,
+      "matchedOriginalStops": 10,
+      "officialOnlyStops": 26,
+      "unmatchedOriginalStops": 23,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 10
+      },
+      "stopCount": 36
+    },
+    {
+      "id": "9070",
+      "code": "F907",
+      "operators": [
+        "真好客運(9人座)"
+      ],
+      "pdf": "stop-addresses/F907_9070.pdf",
+      "pdfStatus": "available",
+      "sourceUrl": "https://ebus.tycg.gov.tw/ebus/driving-map/9070",
+      "pdfSourceUrl": "https://ebus.tycg.gov.tw/cms/api/route/9070/stop-address.pdf",
+      "retrievedAt": "2026-11-04T15:58:33.7525511+08:00",
+      "status": "ready",
+      "pendingPages": [],
+      "warnings": [],
+      "originalWarnings": [],
+      "pageCount": 1,
+      "officialStopCount": 36,
+      "matchedOriginalStops": 28,
+      "officialOnlyStops": 8,
+      "unmatchedOriginalStops": 9,
+      "verification": {
+        "method": "official-route",
+        "snapshotSha256": "C9E35A6E0F840410626448ADDD9B3B4F7F9BEB88F52B6B8D5B315D4B48E9DD7C",
+        "matchedRows": 28
+      },
+      "stopCount": 36
+    }
+  ],
+  "mappedRoutes": 99,
+  "stops": 4797,
+  "mappedStops": 4797,
+  "reviewStops": 0,
+  "officialStops": 4797,
+  "matchedOriginalStops": 3860,
+  "officialOnlyStops": 937,
+  "updatedCoordinates": 3275,
+  "missingPDFs": 1,
+  "ocrRoutes": 0,
+  "coordinatePolicy": "official-complete-pairs"
+}

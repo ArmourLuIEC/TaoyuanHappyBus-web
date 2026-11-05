@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#176b54">
+  <title>桃小巴 / 幸福巴士 GPS 地圖</title>
+  <link rel="stylesheet" href="assets/leaflet/leaflet.css">
+  <link rel="stylesheet" href="map.css">
+  <script defer src="data/stops-data.js"></script>
+  <script defer src="data/route-paths.js"></script>
+  <script defer src="assets/leaflet/leaflet.js"></script>
+  <script defer src="assets/lucide/lucide.js"></script>
+  <script defer src="route-display.js"></script>
+  <script defer src="map.js"></script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <span class="brand-symbol" aria-hidden="true"><i data-lucide="bus-front"></i></span>
+      <div><h1>桃小巴 / 幸福巴士 <span>GPS</span></h1><p>官方公車資料 <span class="separator">/</span> <time id="data-date" datetime="2026-11-04">2026.11.04</time></p></div>
+    </div>
+  </header>
+
+  <main class="app-body">
+    <aside class="sidebar" aria-label="路線與站點">
+      <div class="sidebar-controls">
+        <label class="search-box">
+          <i data-lucide="search" aria-hidden="true"></i>
+          <input id="search" type="search" autocomplete="off" placeholder="路線、站名或站址" aria-label="搜尋路線、站名或站址">
+          <button id="clear-search" class="icon-button" type="button" hidden title="清除搜尋" aria-label="清除搜尋"><i data-lucide="x"></i></button>
+        </label>
+        <div id="route-filters" class="route-filters">
+          <select id="operator" aria-label="營運業者"><option value="all">所有營運業者</option></select>
+        </div>
+      </div>
+      <div class="sidebar-tabs" role="tablist" aria-label="清單檢視">
+        <button id="routes-tab" role="tab" aria-selected="true" aria-controls="route-list" data-view="routes">路線 <span id="route-tab-count">99</span></button>
+        <button id="stops-tab" role="tab" aria-selected="false" aria-controls="stop-list" data-view="stops" disabled>站點 <span id="stop-tab-count">0</span></button>
+      </div>
+      <div class="results-heading">
+        <h2 id="results-title">路線清單</h2><span id="results-count"></span>
+        <button id="reset-filters" class="icon-button" hidden title="重設篩選" aria-label="重設篩選"><i data-lucide="filter-x"></i></button>
+      </div>
+      <div id="route-list" class="result-list" role="tabpanel" aria-labelledby="routes-tab"></div>
+      <div id="stop-list" class="result-list" role="tabpanel" aria-labelledby="stops-tab" hidden></div>
+      <footer class="sidebar-footer" id="data-summary"></footer>
+    </aside>
+
+    <section class="map-panel" aria-label="站址表 GPS 地圖">
+      <div class="map-topbar">
+        <div id="selection-copy" class="selection-copy" hidden><h2 id="selection-title"></h2><p id="selection-summary"></p></div>
+        <div class="selection-actions">
+          <button id="fit-map" class="icon-button" title="縮放至目前站點" aria-label="縮放至目前站點"><i data-lucide="scan"></i></button>
+          <button id="clear-route" class="icon-button" hidden title="返回路線清單" aria-label="返回路線清單"><i data-lucide="x"></i></button>
+        </div>
+      </div>
+      <div class="map-options">
+        <div class="segmented directions" role="group" aria-label="行駛方向">
+          <button data-direction="all" aria-pressed="true">全部</button>
+          <button data-direction="outbound" aria-pressed="false">往程</button>
+          <button data-direction="inbound" aria-pressed="false">返程</button>
+          <button data-direction="unspecified" aria-pressed="false" hidden>未標方向</button>
+        </div>
+        <label class="checkbox-label line-control"><input id="connect-stops" type="checkbox" checked disabled><span id="connection-label">路線連線</span></label>
+      </div>
+      <div class="map-area">
+        <div id="map" aria-label="GPS 站點地圖"></div>
+        <div id="map-empty" class="map-empty" hidden><i data-lucide="circle-alert"></i><strong id="empty-message">GPS 待校對</strong></div>
+        <div id="tile-warning" class="tile-warning" role="status" hidden>底圖暫時無法載入</div>
+        <div id="map-legend" class="map-legend" aria-label="地圖圖例"></div>
+      </div>
+    </section>
+  </main>
+  <div id="fatal-error" role="alert" hidden>地圖資料或套件未載入</div>
+</body>
+</html>
