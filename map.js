@@ -14,7 +14,7 @@
   const routeContext = display.createRouteContext(data, roadData);
   const directionLabels = { outbound: '往程', inbound: '返程', unspecified: '未標方向' };
   let state = selection.initialState();
-  const map = L.map('map', { preferCanvas: true, fadeAnimation: false, zoomControl: false, attributionControl: true }).setView([24.98, 121.23], 10);
+  const map = L.map('map', { preferCanvas: true, renderer: L.canvas({ tolerance: 10 }), fadeAnimation: false, zoomControl: false, attributionControl: true }).setView([24.98, 121.23], 10);
   L.control.zoom({ position: 'topright' }).addTo(map);
   L.control.scale({ imperial: false, position: 'bottomleft' }).addTo(map);
   const basemap = L.tileLayer('https://wmts.nlsc.gov.tw/wmts/EMAP/default/GoogleMapsCompatible/{z}/{y}/{x}', {
