@@ -155,7 +155,7 @@
           selected,
           style: {
             color: selected ? directionColors[line.direction] : plan.route.color,
-            weight: plan.source === 'official' ? selected ? 4 : 2.5 : 2,
+            weight: selected ? 6 : plan.source === 'official' ? 2.5 : 2,
             opacity: route ? selected ? .8 : .33 : .65,
             dashArray: plan.source === 'official' ? undefined : '5 6',
           },
