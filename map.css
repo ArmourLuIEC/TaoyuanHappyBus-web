@@ -82,6 +82,7 @@ select { min-width: 0; flex: 1; height: 35px; padding: 0 8px; border: 1px solid 
 .map-options { display: flex; justify-content: space-between; align-items: center; padding: 0 18px 9px; gap: 10px; background: var(--paper); border-bottom: 1px solid var(--border); }
 .directions { min-width: 176px; max-width: 292px; }
 .directions button { min-width: 49px; }
+#district { flex: 0 1 160px; }
 .map-area { position: relative; flex: 1; min-height: 0; }
 #map { position: absolute; inset: 0; background-color: #e5eee8; background-image: linear-gradient(#d1ddd340 1px, transparent 1px), linear-gradient(90deg, #d1ddd340 1px, transparent 1px); background-size: 48px 48px; }
 .leaflet-container { font-family: "Bahnschrift", "Microsoft JhengHei", sans-serif; font-size: 12px; }
@@ -97,6 +98,7 @@ select { min-width: 0; flex: 1; height: 35px; padding: 0 8px; border: 1px solid 
 #map { --stop-size: 32px; --stop-font-size: 12px; --stop-shared-font-size: 10px; --stop-border-width: 2px; --stop-shadow: 0 1px 4px #25372f55; }
 #map[data-marker-mode="overview"] { --stop-size: 6px; --stop-font-size: 0px; --stop-shared-font-size: 0px; --stop-border-width: 1px; --stop-shadow: none; }
 #map[data-marker-mode="compact"] { --stop-size: 20px; --stop-font-size: 10px; --stop-shared-font-size: 8px; --stop-border-width: 1px; --stop-shadow: 0 1px 2px #25372f33; }
+#map:not([data-marker-mode="overview"]) .stop-marker-unselected { --stop-size: 10px; --stop-border-width: 1px; --stop-shadow: none; }
 .numbered-stop-marker { background: transparent; border: 0; width: var(--stop-size) !important; height: var(--stop-size) !important; margin-left: calc(var(--stop-size) / -2) !important; margin-top: calc(var(--stop-size) / -2) !important; }
 .stop-label { width: 100%; height: 100%; display: grid; place-items: center; border: var(--stop-border-width) solid white; border-radius: 50%; background: var(--marker-color); color: white; font: 600 var(--stop-font-size)/1 "Bahnschrift", "Microsoft JhengHei", sans-serif; font-variant-numeric: tabular-nums; box-shadow: var(--stop-shadow); }
 .stop-label-shared { font-size: var(--stop-shared-font-size); }

@@ -81,6 +81,7 @@
   const lines = L.featureGroup().addTo(map);
   const markerLookup = new Map();
   let markerBounds = L.latLngBounds();
+  let lineBounds = L.latLngBounds();
   function updateVisibleMarkers() {
     const bounds = map.getBounds().pad(.25);
     for (const marker of markerLookup.values()) {
@@ -193,8 +194,9 @@
     for (const { route, point } of group.entries) {
       const entry = create('div', 'popup-entry');
       const routeButton = create('button', 'command-button popup-route', `${route.code} · ${directionLabels[point.direction]}${point.sequence === null ? '' : ` ${point.sequence}`}`);
-      const color = selectedRoute() ? directionColors[point.direction] : routeColors.get(route.id);
+      const color = selectedRoute() && route.id === state.activeId ? directionColors[point.direction] : routeColors.get(route.id);
       routeButton.style.setProperty('--route-color', color);
+      if (state.activeId && route.id !== state.activeId) routeButton.style.opacity = '.33';
       routeButton.title = `查看 ${route.code} 路線與站點`;
       if (globalThis.lucide) {
         const icon = globalThis.lucide.createElement(globalThis.lucide.ArrowRight);
@@ -224,50 +226,75 @@
 
   function fitMarkers() {
     map.invalidateSize({ pan: false });
-    const bounds = lines.getLayers().length ? lines.getBounds() : markerBounds;
+    const bounds = lineBounds.isValid() ? lineBounds : markerBounds;
     if (bounds.isValid()) map.fitBounds(bounds, { padding: [35, 35], maxZoom: 14, animate: false });
   }
 
   function renderMap(fit = false) {
     const route = selectedRoute();
-    const routes = route ? [route] : filteredRoutes();
-    currentEntries = routes.flatMap((route) => validPoints(route).filter((point) => state.direction === 'all' || point.direction === state.direction).map((point) => ({ route, point })));
+    const routes = filteredRoutes();
+    if (route && !routes.some((entry) => entry.id === route.id)) routes.push(route);
+    const entries = routes.flatMap((entry) => validPoints(entry).filter((point) => (route && entry.id !== route.id) || state.direction === 'all' || point.direction === state.direction).map((point) => ({ route: entry, point })));
+    currentEntries = route ? entries.filter((entry) => entry.route.id === route.id) : entries;
     markers.clearLayers();
     lines.clearLayers();
     markerLookup.clear();
     markerBounds = L.latLngBounds();
+    lineBounds = L.latLngBounds();
     const groups = new Map();
-    for (const entry of currentEntries) {
+    for (const entry of entries) {
       const key = keyFor(entry.point);
       if (!groups.has(key)) groups.set(key, { point: entry.point, entries: [] });
       groups.get(key).entries.push(entry);
     }
     for (const [key, group] of groups) {
-      const needsReview = group.entries.some((entry) => entry.point.reviewReasons.length);
-      const color = needsReview ? '#b45309' : route ? directionColors[group.point.direction] : routeColors.get(group.entries[0].route.id);
+      const activeEntries = route ? group.entries.filter((entry) => entry.route.id === route.id) : group.entries;
+      const selectedMarker = Boolean(route && activeEntries.length);
+      const shownEntries = activeEntries.length ? activeEntries : group.entries;
+      const needsReview = shownEntries.some((entry) => entry.point.reviewReasons.length);
+      const color = needsReview ? '#b45309' : route && activeEntries.length ? directionColors[shownEntries[0].point.direction] : routeColors.get(group.entries[0].route.id);
       const position = [group.point.latitude, group.point.longitude];
-      const label = display.sequenceLabel(group.entries);
-      const badge = create('span', `stop-label${needsReview ? ' stop-label-warning' : ''}${label.text.length > 3 ? ' stop-label-shared' : ''}`, label.text);
+      const label = display.sequenceLabel(shownEntries);
+      const badge = create('span', `stop-label${needsReview ? ' stop-label-warning' : ''}${label.text.length > 3 ? ' stop-label-shared' : ''}`, selectedMarker ? label.text : '');
       badge.style.setProperty('--marker-color', color);
-      badge.title = `${group.point.name || 'GPS 站點'} · ${label.full}`;
+      badge.title = `${group.point.name || 'GPS 站點'}${selectedMarker ? ` · ${label.full}` : ''}`;
       const marker = L.marker(position, {
-        icon: L.divIcon({ html: badge, className: 'numbered-stop-marker', iconSize: [32, 32], iconAnchor: [16, 16] }),
+        icon: L.divIcon({ html: badge, className: `numbered-stop-marker${selectedMarker ? '' : ' stop-marker-unselected'}`, iconSize: [32, 32], iconAnchor: [16, 16] }),
         title: badge.title,
         riseOnHover: true,
+        zIndexOffset: activeEntries.length && route ? 1000 : 0,
+        opacity: route && !activeEntries.length ? .33 : 1,
+      });
+      marker.on('click', () => {
+        const selected = group.entries.find((entry) => entry.route.id === state.activeId) || group.entries[0];
+        state.view = 'stops';
+        if (state.activeId !== selected.route.id) {
+          selectRoute(selected.route.id);
+          state.stopKey = key;
+          renderSidebar();
+          markerLookup.get(key)?.openPopup();
+        } else {
+          state.stopKey = key;
+          renderSidebar();
+        }
       });
       marker.bindPopup(() => popupFor(group), { maxWidth: 295 });
-      marker.bindTooltip(create('span', '', `${group.point.name || 'GPS 站點'} · ${label.full}${group.entries.length > 1 ? ` · ${group.entries.length} 筆` : ''}`), { direction: 'top' });
+      marker.bindTooltip(create('span', '', `${badge.title}${group.entries.length > 1 ? ` · ${group.entries.length} 筆` : ''}`), { direction: 'top' });
       markerLookup.set(key, marker);
-      markerBounds.extend(position);
+      if (!route || activeEntries.length) markerBounds.extend(position);
     }
-    const plans = routes.map((entry) => ({ route: entry, ...display.linePlan(entry, roadData.routes[entry.id], state.direction) })).filter((plan) => plan.lines.length);
+    const plans = routes.map((entry) => ({ route: entry, ...display.linePlan(entry, roadData.routes[entry.id], !route || entry.id === route.id ? state.direction : 'all') })).filter((plan) => plan.lines.length);
+    if (route) plans.sort((first, second) => Number(first.route.id === route.id) - Number(second.route.id === route.id));
     const sources = new Set(plans.map((plan) => plan.source));
     const lineSource = sources.size === 1 ? plans[0].source : sources.size > 1 ? 'mixed' : 'none';
     let lineCount = 0;
     for (const plan of plans) {
       for (const line of plan.lines) {
-        const color = route ? directionColors[line.direction] : routeColors.get(plan.route.id);
-        L.polyline(line.coordinates, { color, weight: plan.source === 'official' ? route ? 4 : 2.5 : 2, opacity: route ? .8 : .65, dashArray: plan.source === 'official' ? undefined : '5 6', interactive: false }).addTo(lines);
+        const active = !route || plan.route.id === route.id;
+        const color = route && active ? directionColors[line.direction] : routeColors.get(plan.route.id);
+        const polyline = L.polyline(line.coordinates, { color, weight: plan.source === 'official' ? route && active ? 4 : 2.5 : 2, opacity: route ? active ? .8 : .33 : .65, dashArray: plan.source === 'official' ? undefined : '5 6', interactive: true }).addTo(lines);
+        polyline.on('click', () => { if (state.activeId !== plan.route.id) selectRoute(plan.route.id); });
+        if (active) lineBounds.extend(polyline.getBounds());
         lineCount += 1;
       }
     }
@@ -351,6 +378,25 @@
   element('back-to-routes').addEventListener('click', resetSelection);
   element('clear-route').addEventListener('click', resetSelection);
   element('fit-map').addEventListener('click', fitMarkers);
+  const districtBounds = new Map();
+  for (const district of ['桃園區', '中壢區', '平鎮區', '八德區', '楊梅區', '蘆竹區', '大溪區', '龍潭區', '龜山區', '大園區', '觀音區', '新屋區', '復興區']) {
+    const bounds = L.latLngBounds();
+    for (const route of data.routes) {
+      for (const point of validPoints(route)) {
+        if (point.address?.includes(district) && !point.reviewReasons.length) bounds.extend([point.latitude, point.longitude]);
+      }
+    }
+    if (!bounds.isValid()) continue;
+    districtBounds.set(district, bounds);
+    const option = create('option', '', district);
+    option.value = district;
+    element('district').append(option);
+  }
+  element('district').addEventListener('change', (event) => {
+    const bounds = districtBounds.get(event.target.value);
+    if (bounds) map.fitBounds(bounds, { padding: [35, 35], maxZoom: 14, animate: false });
+    event.target.value = '';
+  });
   for (const operator of operators) {
     const option = create('option', '', operator);
     option.value = operator;
