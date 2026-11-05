@@ -17,64 +17,21 @@
   const map = L.map('map', { preferCanvas: true, fadeAnimation: false, zoomControl: false, attributionControl: true }).setView([24.98, 121.23], 10);
   L.control.zoom({ position: 'topright' }).addTo(map);
   L.control.scale({ imperial: false, position: 'bottomleft' }).addTo(map);
-  const basemaps = [
-    {
-      id: 'nlsc',
-      name: '臺灣通用電子地圖',
-      layer: L.tileLayer('https://wmts.nlsc.gov.tw/wmts/EMAP/default/GoogleMapsCompatible/{z}/{y}/{x}', {
-        maxZoom: 19,
-        crossOrigin: 'anonymous',
-        attribution: '&copy; <a href="https://maps.nlsc.gov.tw/" target="_blank" rel="noopener">內政部國土測繪中心</a>',
-      }),
-    },
-    {
-      id: 'carto',
-      name: 'CARTO 淺色底圖',
-      layer: L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        subdomains: 'abcd',
-        crossOrigin: 'anonymous',
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>',
-      }),
-    },
-  ];
-  const failedBasemaps = new Set();
-  let activeBasemap;
-  function useBasemap(provider) {
-    if (provider === activeBasemap) return;
-    if (activeBasemap) map.removeLayer(activeBasemap.layer);
-    activeBasemap = provider;
-    element('map').dataset.basemap = provider.id;
-    element('tile-warning').hidden = true;
-    provider.layer.addTo(map);
-  }
-  for (const provider of basemaps) {
-    provider.layer.on('tileerror', () => {
-      if (activeBasemap !== provider) return;
-      failedBasemaps.add(provider.id);
-      const backup = basemaps.find((candidate) => !failedBasemaps.has(candidate.id));
-      if (backup) useBasemap(backup);
-      else {
-        element('tile-warning').textContent = '底圖連線失敗，站點仍可查詢';
-        element('tile-warning').hidden = false;
-      }
-    });
-    provider.layer.on('load', () => {
-      if (activeBasemap === provider && !failedBasemaps.has(provider.id)) element('tile-warning').hidden = true;
-    });
-  }
-  const basemapControl = L.control.layers(Object.fromEntries(basemaps.map((provider) => [provider.name, provider.layer])), null, { position: 'topright' }).addTo(map);
-  const basemapToggle = basemapControl.getContainer().querySelector('.leaflet-control-layers-toggle');
-  basemapToggle.title = '底圖來源';
-  basemapToggle.setAttribute('aria-label', '底圖來源');
-  map.on('baselayerchange', (event) => {
-    const provider = basemaps.find((candidate) => candidate.layer === event.layer);
-    if (provider && provider !== activeBasemap) {
-      failedBasemaps.clear();
-      useBasemap(provider);
-    }
+  const basemap = L.tileLayer('https://wmts.nlsc.gov.tw/wmts/EMAP/default/GoogleMapsCompatible/{z}/{y}/{x}', {
+    maxZoom: 19,
+    crossOrigin: 'anonymous',
+    attribution: '&copy; <a href="https://maps.nlsc.gov.tw/" target="_blank" rel="noopener">內政部國土測繪中心</a>',
   });
-  useBasemap(basemaps[0]);
+  let tileLoadFailed = false;
+  basemap.on('loading', () => { tileLoadFailed = false; });
+  basemap.on('tileerror', () => {
+    tileLoadFailed = true;
+    element('tile-warning').textContent = '底圖連線失敗，站點仍可查詢';
+    element('tile-warning').hidden = false;
+  });
+  basemap.on('load', () => { if (!tileLoadFailed) element('tile-warning').hidden = true; });
+  element('map').dataset.basemap = 'nlsc';
+  basemap.addTo(map);
   const markers = L.featureGroup().addTo(map);
   const lines = L.featureGroup().addTo(map);
   const markerLookup = new Map();
@@ -129,7 +86,10 @@
     element('search').placeholder = stationView ? '站名或站址' : '路線、站名或站址';
     element('search').value = stationView ? state.stopQuery : state.routeQuery;
     element('clear-search').hidden = !element('search').value;
-    element('reset-filters').hidden = stationView || !(state.routeQuery || state.operator !== 'all');
+    element('reset-filters').hidden = stationView || !(state.routeQuery || state.operator !== 'all' || state.districts.length);
+    element('district-label').textContent = state.districts.length ? `行政區：${state.districts.length} 個` : '行政區：全部';
+    element('clear-districts').disabled = !state.districts.length;
+    for (const checkbox of element('district-options').querySelectorAll('input')) checkbox.checked = state.districts.includes(checkbox.value);
     element('back-to-routes').hidden = !route;
     element('stop-tab-count').textContent = route ? format.format(route.points.length) : '0';
     if (stationView) {
@@ -213,13 +173,17 @@
     return content;
   }
 
-  function fitMarkers() {
+  function fitMarkers(animate = false) {
+    map.stop();
     map.invalidateSize({ pan: false });
     const bounds = L.latLngBounds(fitBounds);
-    if (bounds.isValid()) map.fitBounds(bounds, { padding: [35, 35], maxZoom: 14, animate: false });
+    if (!bounds.isValid()) return;
+    const options = { padding: [35, 35], maxZoom: 14 };
+    if (animate && !globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches) map.flyToBounds(bounds, { ...options, duration: 0.8 });
+    else map.fitBounds(bounds, { ...options, animate: false });
   }
 
-  function renderMap(fit = false) {
+  function renderMap(fit = false, animate = false) {
     const context = routeContext(state);
     const { route, groups } = context;
     currentEntries = context.currentEntries;
@@ -256,8 +220,8 @@
     element('map').dataset.lineSource = context.lineSource;
     element('map').dataset.lineRoutes = context.lineRoutes;
     element('map').dataset.numberedStops = groups.length;
-    element('selection-copy').hidden = !route && !state.routeQuery && state.operator === 'all';
-    element('selection-title').textContent = route ? route.code : state.routeQuery || state.operator !== 'all' ? '篩選站點' : '全部站點';
+    element('selection-copy').hidden = !route && !state.routeQuery && state.operator === 'all' && !state.districts.length;
+    element('selection-title').textContent = route ? route.code : state.routeQuery || state.operator !== 'all' || state.districts.length ? '篩選站點' : '全部站點';
     element('selection-summary').textContent = route ? `${route.operators.join(' / ')} · ${format.format(currentEntries.length)} 筆 GPS` : `${new Set(currentEntries.map((entry) => entry.route.id)).size} 條路線 · ${format.format(currentEntries.length)} 筆 GPS`;
     element('clear-route').hidden = !route;
     element('map-empty').hidden = currentEntries.length > 0;
@@ -275,7 +239,7 @@
       button.setAttribute('aria-pressed', String(button.dataset.direction === state.direction));
       button.hidden = button.dataset.direction === 'unspecified' && (!route || !routePoints(route).some((point) => point.direction === 'unspecified'));
     }
-    if (fit) fitMarkers();
+    if (fit) fitMarkers(animate);
     updateVisibleMarkers();
   }
 
@@ -284,7 +248,7 @@
     state = result.state;
     const { effects } = result;
     if (effects.render !== 'none') renderSidebar();
-    if (effects.render === 'all') renderMap(effects.fit);
+    if (effects.render === 'all') renderMap(effects.fit, action.type === 'districts' || action.type === 'route');
     if (effects.stop) {
       if (effects.stop.position) map.setView(effects.stop.position, 15, { animate: false });
       markerLookup.get(effects.stop.key)?.openPopup();
@@ -295,12 +259,23 @@
       searchTimer = setTimeout(() => dispatch({ type: 'search-apply', view: effects.searchView }), 120);
     }
     if (effects.focusSearch) element('search').focus();
-    if (effects.district) {
-      const bounds = districtBounds.get(effects.district);
-      if (bounds) map.fitBounds(bounds, { padding: [35, 35], maxZoom: 14, animate: false });
-    }
   }
 
+  element('toggle-sidebar').addEventListener('click', (event) => {
+    const sidebar = element('sidebar');
+    const collapsed = !sidebar.hidden;
+    sidebar.hidden = collapsed;
+    document.querySelector('.app-body').classList.toggle('sidebar-collapsed', collapsed);
+    event.currentTarget.setAttribute('aria-expanded', String(!collapsed));
+    event.currentTarget.setAttribute('aria-label', collapsed ? '展開路線與站點' : '收折路線與站點');
+    event.currentTarget.title = collapsed ? '展開路線與站點' : '收折路線與站點';
+    const icon = globalThis.lucide?.createElement(collapsed ? globalThis.lucide.PanelLeftOpen : globalThis.lucide.PanelLeftClose);
+    if (icon) {
+      icon.setAttribute('aria-hidden', 'true');
+      event.currentTarget.replaceChildren(icon);
+    }
+    map.invalidateSize({ pan: true, animate: false });
+  });
   element('route-list').addEventListener('click', (event) => {
     const button = event.target.closest('[data-route-id]');
     if (button) dispatch({ type: 'route', routeId: button.dataset.routeId, source: 'list' });
@@ -319,32 +294,34 @@
   element('reset-filters').addEventListener('click', () => dispatch({ type: 'reset-filters' }));
   element('back-to-routes').addEventListener('click', () => dispatch({ type: 'reset' }));
   element('clear-route').addEventListener('click', () => dispatch({ type: 'reset' }));
-  element('fit-map').addEventListener('click', fitMarkers);
-  const districtBounds = new Map();
-  const districtRoutes = routeContext().routes;
+  element('fit-map').addEventListener('click', () => fitMarkers());
   for (const district of ['桃園區', '中壢區', '平鎮區', '八德區', '楊梅區', '蘆竹區', '大溪區', '龍潭區', '龜山區', '大園區', '觀音區', '新屋區', '復興區']) {
-    const bounds = L.latLngBounds();
-    for (const route of districtRoutes) {
-      for (const point of route.mappedPoints) {
-        if (point.address?.includes(district) && !point.reviewReasons.length) bounds.extend([point.latitude, point.longitude]);
-      }
-    }
-    if (!bounds.isValid()) continue;
-    districtBounds.set(district, bounds);
-    const option = create('option', '', district);
-    option.value = district;
-    element('district').append(option);
+    const label = create('label');
+    const checkbox = create('input');
+    checkbox.type = 'checkbox';
+    checkbox.value = district;
+    label.append(checkbox, document.createTextNode(district));
+    element('district-options').append(label);
   }
-  element('district').addEventListener('change', (event) => {
-    dispatch({ type: 'district', district: event.target.value });
-    event.target.value = '';
+  element('district-options').addEventListener('change', () => {
+    const districts = [...element('district-options').querySelectorAll('input:checked')].map((checkbox) => checkbox.value);
+    dispatch({ type: 'districts', districts });
+  });
+  element('clear-districts').addEventListener('click', () => dispatch({ type: 'districts', districts: [] }));
+  document.addEventListener('click', (event) => {
+    if (!element('district-picker').contains(event.target)) element('district-picker').open = false;
+  });
+  element('district-picker').addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && element('district-picker').open) {
+      element('district-picker').open = false;
+      element('district-picker').querySelector('summary').focus();
+    }
   });
   for (const operator of operators) {
     const option = create('option', '', operator);
     option.value = operator;
     element('operator').append(option);
   }
-  element('data-summary').textContent = `官方座標 ${format.format(data.stats.officialStops || 0)} 筆 · ${data.stats.missingPDFs} 條原表缺檔 · ${data.stats.reviewStops} 筆官方 GPS 待確認`;
   globalThis.lucide?.createIcons({ attrs: { 'aria-hidden': 'true' } });
   renderSidebar();
   renderMap(true);

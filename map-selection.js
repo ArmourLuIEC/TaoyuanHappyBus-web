@@ -2,7 +2,7 @@
   'use strict';
 
   function initialState() {
-    return { activeId: null, view: 'routes', routeQuery: '', stopQuery: '', operator: 'all', direction: 'all', stopKey: null };
+    return { activeId: null, view: 'routes', routeQuery: '', stopQuery: '', operator: 'all', districts: [], direction: 'all', stopKey: null };
   }
 
   function selectRoute(state, routeId) {
@@ -71,14 +71,14 @@
         next = resetSelection({ ...state, operator: action.operator });
         break;
       case 'reset-filters':
-        next = resetSelection({ ...state, routeQuery: '', operator: 'all' });
+        next = resetSelection({ ...state, routeQuery: '', operator: 'all', districts: [] });
         break;
       case 'reset':
         next = resetSelection(state);
         break;
-      case 'district':
-        effects.render = 'none';
-        effects.district = action.district;
+      case 'districts':
+        next = resetSelection({ ...state, districts: action.districts });
+        effects.fit = true;
         break;
       default:
         throw new Error(`Unknown selection action: ${action.type}`);

@@ -24,7 +24,7 @@
   </header>
 
   <main class="app-body">
-    <aside class="sidebar" aria-label="路線與站點">
+    <aside id="sidebar" class="sidebar" aria-label="路線與站點">
       <div class="sidebar-controls">
         <label class="search-box">
           <i data-lucide="search" aria-hidden="true"></i>
@@ -46,11 +46,11 @@
       </div>
       <div id="route-list" class="result-list" role="tabpanel" aria-labelledby="routes-tab"></div>
       <div id="stop-list" class="result-list" role="tabpanel" aria-labelledby="stops-tab" hidden></div>
-      <footer class="sidebar-footer" id="data-summary"></footer>
     </aside>
 
     <section class="map-panel" aria-label="站址表 GPS 地圖">
       <div class="map-topbar">
+        <button id="toggle-sidebar" class="icon-button" type="button" aria-controls="sidebar" aria-expanded="true" aria-label="收折路線與站點" title="收折路線與站點"><i data-lucide="panel-left-close"></i></button>
         <div id="selection-copy" class="selection-copy" hidden><h2 id="selection-title"></h2><p id="selection-summary"></p></div>
         <div class="selection-actions">
           <button id="fit-map" class="icon-button" title="縮放至目前站點" aria-label="縮放至目前站點"><i data-lucide="scan"></i></button>
@@ -64,7 +64,13 @@
           <button data-direction="inbound" aria-pressed="false">返程</button>
           <button data-direction="unspecified" aria-pressed="false" hidden>未標方向</button>
         </div>
-        <select id="district" aria-label="快速定位行政區"><option value="">快速定位行政區</option></select>
+        <details id="district-picker" class="district-picker">
+          <summary><span id="district-label">行政區：全部</span><i data-lucide="chevron-down" aria-hidden="true"></i></summary>
+          <div class="district-panel">
+            <fieldset><legend>行政區</legend><div id="district-options" class="district-options"></div></fieldset>
+            <button id="clear-districts" class="command-button" type="button" disabled><i data-lucide="x" aria-hidden="true"></i>清除選擇</button>
+          </div>
+        </details>
       </div>
       <div class="map-area">
         <div id="map" aria-label="GPS 站點地圖"></div>

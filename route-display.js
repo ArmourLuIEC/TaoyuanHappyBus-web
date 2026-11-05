@@ -100,12 +100,13 @@
     let lastContext;
 
     return (state = {}) => {
-      const key = JSON.stringify([state.activeId, state.operator, state.routeQuery, state.direction]);
+      const key = JSON.stringify([state.activeId, state.operator, state.routeQuery, state.direction, state.districts]);
       if (key === lastKey) return lastContext;
       const route = routes.find((entry) => entry.id === state.activeId);
       const query = (state.routeQuery || '').trim().toLocaleLowerCase();
       const direction = state.direction || 'all';
       const filtered = routes.filter((entry) => (!state.operator || state.operator === 'all' || entry.operators.includes(state.operator))
+        && (!state.districts?.length || entry.points.some((point) => state.districts.some((district) => point.address?.includes(district))))
         && (!query || matches(entry.code, query) || entry.operators.some((operator) => matches(operator, query))
           || entry.points.some((point) => matches(point.name, query) || matches(point.address, query))));
       const visibleRoutes = route && !filtered.includes(route) ? [...filtered, route] : filtered;
