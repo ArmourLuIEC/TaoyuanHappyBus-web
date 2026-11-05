@@ -78,6 +78,8 @@
     const stationView = state.view === 'stops' && route;
     element('route-list').hidden = Boolean(stationView);
     element('stop-list').hidden = !stationView;
+    element('results-title').classList.toggle('station-heading', Boolean(stationView));
+    element('results-count').hidden = Boolean(stationView);
     element('route-filters').hidden = Boolean(stationView);
     element('operator').value = state.operator;
     element('stops-tab').disabled = !route;
@@ -97,7 +99,6 @@
       const stops = routePoints(route).map((point, index) => ({ point, index })).filter(({ point }) => (state.direction === 'all' || point.direction === state.direction)
         && (!query || textMatches(point.name, query) || textMatches(point.address, query)));
       element('results-title').textContent = `${route.code} 站點`;
-      element('results-count').textContent = `${stops.length} 筆`;
       const fragment = document.createDocumentFragment();
       for (const { point, index } of stops) {
         const button = create('button', `stop-row${point.reviewReasons.length ? ' review' : ''}${state.stopKey === keyFor(point) ? ' active' : ''}`);
@@ -247,6 +248,7 @@
     const result = selection.transition(state, action);
     state = result.state;
     const { effects } = result;
+    if (action.type === 'route' && action.source === 'path') setSidebarCollapsed(false);
     if (effects.render !== 'none') renderSidebar();
     if (effects.render === 'all') renderMap(effects.fit, action.type === 'districts' || action.type === 'route');
     if (effects.stop) {
@@ -261,21 +263,23 @@
     if (effects.focusSearch) element('search').focus();
   }
 
-  element('toggle-sidebar').addEventListener('click', (event) => {
+  function setSidebarCollapsed(collapsed) {
     const sidebar = element('sidebar');
-    const collapsed = !sidebar.hidden;
-    sidebar.hidden = collapsed;
+    const button = element('toggle-sidebar');
     document.querySelector('.app-body').classList.toggle('sidebar-collapsed', collapsed);
-    event.currentTarget.setAttribute('aria-expanded', String(!collapsed));
-    event.currentTarget.setAttribute('aria-label', collapsed ? '展開路線與站點' : '收折路線與站點');
-    event.currentTarget.title = collapsed ? '展開路線與站點' : '收折路線與站點';
+    sidebar.inert = collapsed;
+    if (collapsed) sidebar.setAttribute('aria-hidden', 'true');
+    else sidebar.removeAttribute('aria-hidden');
+    button.setAttribute('aria-expanded', String(!collapsed));
+    button.setAttribute('aria-label', collapsed ? '展開路線與站點' : '收折路線與站點');
+    button.title = collapsed ? '展開路線與站點' : '收折路線與站點';
     const icon = globalThis.lucide?.createElement(collapsed ? globalThis.lucide.PanelLeftOpen : globalThis.lucide.PanelLeftClose);
     if (icon) {
       icon.setAttribute('aria-hidden', 'true');
-      event.currentTarget.replaceChildren(icon);
+      button.replaceChildren(icon);
     }
-    map.invalidateSize({ pan: true, animate: false });
-  });
+  }
+  element('toggle-sidebar').addEventListener('click', () => setSidebarCollapsed(!element('sidebar').inert));
   element('route-list').addEventListener('click', (event) => {
     const button = event.target.closest('[data-route-id]');
     if (button) dispatch({ type: 'route', routeId: button.dataset.routeId, source: 'list' });
@@ -325,7 +329,7 @@
   globalThis.lucide?.createIcons({ attrs: { 'aria-hidden': 'true' } });
   renderSidebar();
   renderMap(true);
-  const resizeObserver = new ResizeObserver(() => map.invalidateSize({ pan: false }));
+  const resizeObserver = new ResizeObserver(() => map.invalidateSize({ pan: true, animate: false, debounceMoveend: true }));
   resizeObserver.observe(element('map'));
   element('map').dataset.ready = 'true';
 })();

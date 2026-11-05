@@ -19,11 +19,12 @@
     switch (action.type) {
       case 'route':
         if (action.source === 'path' && state.activeId === action.routeId) {
-          effects.render = 'none';
+          next.view = 'stops';
+          effects.render = state.view === 'stops' ? 'none' : 'sidebar';
           break;
         }
         next = selectRoute(state, action.routeId);
-        if (action.source === 'popup') next.view = 'stops';
+        if (action.source === 'popup' || action.source === 'path') next.view = 'stops';
         effects.fit = action.source === 'list';
         break;
       case 'station': {
