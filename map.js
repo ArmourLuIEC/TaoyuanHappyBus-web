@@ -12,6 +12,7 @@
   const format = new Intl.NumberFormat('zh-TW');
   const operators = [...new Set(data.routes.flatMap((route) => route.operators))];
   const routeContext = display.createRouteContext(data, roadData);
+  const routesById = new Map(data.routes.map((route) => [route.id, route]));
   const directionLabels = { outbound: '往程', inbound: '返程', unspecified: '未標方向' };
   let state = selection.initialState();
   const map = L.map('map', { preferCanvas: true, renderer: L.canvas({ tolerance: 10 }), fadeAnimation: false, zoomControl: false, attributionControl: true }).setView([24.98, 121.23], 10);
@@ -53,8 +54,13 @@
   updateMarkerScale();
   let currentEntries = [];
   let searchTimer;
+  let revealTimer;
   const selectedRoute = () => routeContext(state).route;
   const routePoints = (route) => display.routePoints(route, roadData.routes[route.id]);
+  const defaultDirectionFor = (route) => {
+    const directions = new Set(routePoints(route).map((point) => point.direction));
+    return ['outbound', 'inbound', 'unspecified'].find((direction) => directions.has(direction)) || 'outbound';
+  };
   const keyFor = (point) => `${point.latitude.toFixed(7)},${point.longitude.toFixed(7)}`;
   const textMatches = (text, query) => (text || '').toLocaleLowerCase().includes(query);
   const create = (tag, className, text) => {
@@ -78,8 +84,10 @@
     const stationView = state.view === 'stops' && route;
     element('route-list').hidden = Boolean(stationView);
     element('stop-list').hidden = !stationView;
-    element('results-title').classList.toggle('station-heading', Boolean(stationView));
+    element('route-list-heading').hidden = Boolean(stationView);
     element('results-count').hidden = Boolean(stationView);
+    element('selection-copy').hidden = !route && !state.routeQuery && state.operator === 'all' && !state.districts.length;
+    element('results-title').textContent = route ? `${route.code}${stationView ? ' 站點' : ''}` : '篩選站點';
     element('route-filters').hidden = Boolean(stationView);
     element('operator').value = state.operator;
     element('stops-tab').disabled = !route;
@@ -98,7 +106,6 @@
       const query = state.stopQuery.trim().toLocaleLowerCase();
       const stops = routePoints(route).map((point, index) => ({ point, index })).filter(({ point }) => (state.direction === 'all' || point.direction === state.direction)
         && (!query || textMatches(point.name, query) || textMatches(point.address, query)));
-      element('results-title').textContent = `${route.code} 站點`;
       const fragment = document.createDocumentFragment();
       for (const { point, index } of stops) {
         const button = create('button', `stop-row${point.reviewReasons.length ? ' review' : ''}${state.stopKey === keyFor(point) ? ' active' : ''}`);
@@ -107,7 +114,7 @@
         button.append(create('span', 'stop-number', point.sequence ?? '-'));
         const copy = create('span', 'row-copy');
         copy.append(create('span', 'stop-name', point.name || '站名未擷取'));
-        copy.append(create('span', 'stop-address', point.reviewReasons.length ? `GPS 待確認 · ${point.gpsRaw.join(', ')}` : `${directionLabels[point.direction]} · ${point.address || '站址未擷取'}`));
+        copy.append(create('span', 'stop-detail', point.reviewReasons.length ? `GPS 待確認 · ${point.gpsRaw.join(', ')}` : directionLabels[point.direction]));
         button.append(copy);
         fragment.append(button);
       }
@@ -116,7 +123,6 @@
     }
     else {
       const routes = filteredRoutes();
-      element('results-title').textContent = '路線清單';
       element('results-count').textContent = `${routes.length} 條`;
       element('route-tab-count').textContent = routes.length;
       const fragment = document.createDocumentFragment();
@@ -140,7 +146,23 @@
   function popupFor(group) {
     const content = create('div', 'stop-popup');
     content.append(create('div', 'popup-title', group.entries[0].point.name || 'GPS 站點'));
-    content.append(create('div', 'popup-coordinates', `緯度 ${group.point.latitude.toFixed(6)}\n經度 ${group.point.longitude.toFixed(6)}`));
+    const stationIds = [...new Set(group.entries.map(({ point }) => point.coordinateSource?.stationId).filter((id) => id !== null && id !== undefined && id !== ''))];
+    if (stationIds.length) content.append(create('div', 'popup-station-code', `站牌代碼：${stationIds.join('、')}`));
+    const mapUrl = new URL('https://www.google.com/maps/search/');
+    mapUrl.searchParams.set('api', '1');
+    mapUrl.searchParams.set('query', `${group.point.latitude},${group.point.longitude}`);
+    const location = create('div', 'popup-location');
+    const mapLink = create('a', 'command-button', '在 Google 地圖開啟');
+    mapLink.href = mapUrl.href;
+    mapLink.target = '_blank';
+    mapLink.rel = 'noopener noreferrer';
+    if (globalThis.lucide) {
+      const icon = globalThis.lucide.createElement(globalThis.lucide.ArrowUpRight);
+      icon.setAttribute('aria-hidden', 'true');
+      mapLink.append(icon);
+    }
+    location.append(mapLink);
+    content.append(location);
     const list = create('div', 'popup-list');
     for (const { route, point, color, opacity } of group.entries) {
       const entry = create('div', 'popup-entry');
@@ -153,9 +175,8 @@
         icon.setAttribute('aria-hidden', 'true');
         routeButton.append(icon);
       }
-      routeButton.addEventListener('click', () => dispatch({ type: 'route', routeId: route.id, source: 'popup' }));
+      routeButton.addEventListener('click', () => dispatch({ type: 'route', routeId: route.id, source: 'popup', key: keyFor(point), direction: point.direction, sequence: point.sequence }));
       entry.append(routeButton);
-      entry.append(create('p', '', point.address || '無可核對的站址表地址'));
       if (point.reviewReasons.length) entry.append(create('p', 'popup-warning', '官方座標待確認，保留官方原值'));
       const officialLink = create('a', 'command-button', '官網');
       if (globalThis.lucide) {
@@ -205,14 +226,29 @@
         zIndexOffset: selected ? 1000 : 0,
         opacity: group.opacity,
       });
-      marker.on('click', () => dispatch({ type: 'station', routeId: group.routeId, key }));
+      marker.on('click', () => dispatch({ type: 'station', routeId: group.routeId, key, direction: group.entries.find((entry) => entry.route.id === group.routeId)?.point.direction }));
       marker.bindPopup(() => popupFor(group), { maxWidth: 295 });
       marker.bindTooltip(create('span', '', group.tooltip), { direction: 'top' });
       markerLookup.set(key, marker);
     }
     for (const path of context.paths) {
       const polyline = L.polyline(path.coordinates, { ...path.style, interactive: true }).addTo(lines);
-      polyline.on('click', () => dispatch({ type: 'route', routeId: path.routeId, source: 'path' }));
+      polyline.on('click', (event) => {
+        let nearestMarker;
+        let nearestDistance = 12;
+        if (event.containerPoint) {
+          for (const marker of markerLookup.values()) {
+            if (!markers.hasLayer(marker)) continue;
+            const distance = map.latLngToContainerPoint(marker.getLatLng()).distanceTo(event.containerPoint);
+            if (distance < nearestDistance) {
+              nearestMarker = marker;
+              nearestDistance = distance;
+            }
+          }
+        }
+        if (nearestMarker) nearestMarker.fire('click', { latlng: nearestMarker.getLatLng(), originalEvent: event.originalEvent });
+        else dispatch({ type: 'route', routeId: path.routeId, source: 'path' });
+      });
     }
     element('map').dataset.records = currentEntries.length;
     element('map').dataset.locations = groups.length;
@@ -221,9 +257,7 @@
     element('map').dataset.lineSource = context.lineSource;
     element('map').dataset.lineRoutes = context.lineRoutes;
     element('map').dataset.numberedStops = groups.length;
-    element('selection-copy').hidden = !route && !state.routeQuery && state.operator === 'all' && !state.districts.length;
-    element('selection-title').textContent = route ? route.code : state.routeQuery || state.operator !== 'all' || state.districts.length ? '篩選站點' : '全部站點';
-    element('selection-summary').textContent = route ? `${route.operators.join(' / ')} · ${format.format(currentEntries.length)} 筆 GPS` : `${new Set(currentEntries.map((entry) => entry.route.id)).size} 條路線 · ${format.format(currentEntries.length)} 筆 GPS`;
+    element('selection-summary').textContent = route ? route.operators.join(' / ') : `${new Set(currentEntries.map((entry) => entry.route.id)).size} 條路線`;
     element('clear-route').hidden = !route;
     element('map-empty').hidden = currentEntries.length > 0;
     element('empty-message').textContent = route ? route.points.length ? '此方向沒有可確認 GPS' : statusFor(route).text : '沒有相符站點';
@@ -245,12 +279,35 @@
   }
 
   function dispatch(action) {
-    const result = selection.transition(state, action);
+    clearTimeout(revealTimer);
+    const route = action.type === 'route' || action.type === 'station' ? routesById.get(action.routeId) : null;
+    const result = selection.transition(state, route ? { ...action, defaultDirection: defaultDirectionFor(route) } : action);
     state = result.state;
     const { effects } = result;
-    if (action.type === 'route' && action.source === 'path') setSidebarCollapsed(false);
+    const openingSidebar = Boolean(effects.revealStop && element('sidebar').inert);
+    if (effects.revealStop) {
+      const center = map.getCenter();
+      const zoom = map.getZoom();
+      map.stop();
+      map.setView(center, zoom, { animate: false });
+      map.closePopup();
+      if (openingSidebar) setSidebarCollapsed(false);
+    }
     if (effects.render !== 'none') renderSidebar();
     if (effects.render === 'all') renderMap(effects.fit, action.type === 'districts' || action.type === 'route');
+    if (effects.revealStop) {
+      const revealStop = () => {
+        const route = selectedRoute();
+        if (!route || route.id !== action.routeId || state.view !== 'stops' || state.stopKey !== effects.revealStop.key || element('sidebar').inert) return;
+        const index = routePoints(route).findIndex((point) => keyFor(point) === effects.revealStop.key
+          && point.direction === effects.revealStop.direction && point.sequence === effects.revealStop.sequence);
+        const list = element('stop-list');
+        const row = list.querySelector(`[data-stop-index="${index}"]`);
+        if (row) list.scrollTop += row.getBoundingClientRect().top - list.getBoundingClientRect().top - (list.clientHeight - row.offsetHeight) / 2;
+      };
+      revealStop();
+      if (openingSidebar) revealTimer = setTimeout(revealStop, 300);
+    }
     if (effects.stop) {
       if (effects.stop.position) map.setView(effects.stop.position, 15, { animate: false });
       markerLookup.get(effects.stop.key)?.openPopup();

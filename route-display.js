@@ -86,8 +86,6 @@
   function createRouteContext(data, roadData = { routes: {} }) {
     const collator = new Intl.Collator('zh-Hant', { numeric: true });
     const palette = ['#137b49', '#bb3540', '#1767b0', '#ba6100', '#783d99', '#008478', '#b43173', '#695e11'];
-    const directionColors = { outbound: '#176b54', inbound: '#c65d47', unspecified: '#227b98' };
-    const labels = { outbound: '往程', inbound: '返程', unspecified: '未標方向' };
     const matches = (text, query) => (text || '').toLocaleLowerCase().includes(query);
     const routes = [...data.routes].sort((first, second) => collator.compare(first.code, second.code)).map((route, index) => ({
       ...route,
@@ -109,6 +107,16 @@
         && (!state.districts?.length || entry.points.some((point) => state.districts.some((district) => point.address?.includes(district))))
         && (!query || matches(entry.code, query) || entry.operators.some((operator) => matches(operator, query))
           || entry.points.some((point) => matches(point.name, query) || matches(point.address, query))));
+      const overviewColors = new Map();
+      if (route) {
+        for (const entry of filtered) {
+          for (const point of entry.mappedPoints) {
+            if (direction !== 'all' && point.direction !== direction) continue;
+            const key = `${point.latitude.toFixed(7)},${point.longitude.toFixed(7)}`;
+            if (!overviewColors.has(key)) overviewColors.set(key, entry.color);
+          }
+        }
+      }
       const visibleRoutes = route && !filtered.includes(route) ? [...filtered, route] : filtered;
       const entries = visibleRoutes.flatMap((entry) => entry.mappedPoints.filter((point) => (route && entry !== route) || direction === 'all' || point.direction === direction)
         .map((point) => ({ route: entry, point })));
@@ -130,13 +138,13 @@
           ...group,
           entries: group.entries.map((entry) => ({
             ...entry,
-            color: entry.route === route ? directionColors[entry.point.direction] : entry.route.color,
+            color: entry.route.color,
             opacity: route && entry.route !== route ? .33 : 1,
           })),
           routeId: (activeEntries[0] || group.entries[0]).route.id,
           selected,
           needsReview,
-          color: needsReview ? '#b45309' : selected ? directionColors[shownEntries[0].point.direction] : group.entries[0].route.color,
+          color: needsReview ? '#b45309' : overviewColors.get(group.key) || group.entries[0].route.color,
           opacity: route && !selected ? .33 : 1,
           text: selected ? label.text : '',
           sharedLabel: label.text.length > 3,
@@ -154,9 +162,9 @@
           coordinates: line.coordinates,
           selected,
           style: {
-            color: selected ? directionColors[line.direction] : plan.route.color,
-            weight: selected ? 6 : plan.source === 'official' ? 2.5 : 2,
-            opacity: route ? selected ? .8 : .33 : .65,
+            color: plan.route.color,
+            weight: selected ? 6 : plan.source === 'official' ? 3.5 : 3,
+            opacity: route ? selected ? .8 : .25 : .65,
             dashArray: plan.source === 'official' ? undefined : '5 6',
           },
         };
@@ -164,8 +172,7 @@
       const sources = new Set(visiblePlans.map((plan) => plan.source));
       const fitPaths = route ? paths.filter((path) => path.selected) : paths;
       const fitStops = route ? groups.filter((group) => group.selected) : groups;
-      const legend = route ? Object.entries(labels).filter(([entry]) => currentEntries.some(({ point }) => point.direction === entry))
-        .map(([entry, label]) => ({ label, color: directionColors[entry] })) : [];
+      const legend = [];
       if (currentEntries.some(({ point }) => point.reviewReasons.length)) legend.push({ label: 'GPS 異常（原值）', color: '#b45309' });
       lastContext = {
         route,

@@ -2,15 +2,15 @@
   'use strict';
 
   function initialState() {
-    return { activeId: null, view: 'routes', routeQuery: '', stopQuery: '', operator: 'all', districts: [], direction: 'all', stopKey: null };
+    return { activeId: null, view: 'routes', routeQuery: '', stopQuery: '', operator: 'all', districts: [], direction: 'outbound', stopKey: null };
   }
 
-  function selectRoute(state, routeId) {
-    return { ...state, activeId: routeId, direction: 'all', stopQuery: '', stopKey: null };
+  function selectRoute(state, routeId, defaultDirection = 'outbound') {
+    return { ...state, activeId: routeId, direction: defaultDirection, stopQuery: '', stopKey: null };
   }
 
   function resetSelection(state) {
-    return { ...state, activeId: null, view: 'routes', direction: 'all', stopKey: null, stopQuery: '' };
+    return { ...state, activeId: null, view: 'routes', direction: 'outbound', stopKey: null, stopQuery: '' };
   }
 
   function transition(state, action) {
@@ -23,13 +23,18 @@
           effects.render = state.view === 'stops' ? 'none' : 'sidebar';
           break;
         }
-        next = selectRoute(state, action.routeId);
+        next = selectRoute(state, action.routeId, action.defaultDirection);
         if (action.source === 'popup' || action.source === 'path') next.view = 'stops';
+        if (action.source === 'popup' && action.key) {
+          next.direction = action.direction || next.direction;
+          next.stopKey = action.key;
+          effects.revealStop = { key: action.key, direction: action.direction, sequence: action.sequence };
+        }
         effects.fit = action.source === 'list';
         break;
       case 'station': {
         const changed = state.activeId !== action.routeId;
-        if (changed) next = selectRoute(state, action.routeId);
+        if (changed) next = selectRoute(state, action.routeId, action.direction || action.defaultDirection);
         next.view = 'stops';
         next.stopKey = action.key;
         effects.render = changed ? 'all' : 'sidebar';

@@ -22,11 +22,11 @@
       <h1>桃小巴 / 幸福巴士</h1>
     </div>
     <div class="map-topbar">
-      <div id="selection-copy" class="selection-copy" hidden><h2 id="selection-title"></h2><p id="selection-summary"></p></div>
+      <div id="selection-copy" class="selection-copy" hidden><h2 id="results-title"></h2><p id="selection-summary"></p></div>
       <div class="map-options">
         <div class="segmented directions" role="group" aria-label="行駛方向">
-          <button data-direction="all" aria-pressed="true">全部</button>
-          <button data-direction="outbound" aria-pressed="false">往程</button>
+          <button data-direction="all" aria-pressed="false">全部</button>
+          <button data-direction="outbound" aria-pressed="true">往程</button>
           <button data-direction="inbound" aria-pressed="false">返程</button>
           <button data-direction="unspecified" aria-pressed="false" hidden>未標方向</button>
         </div>
@@ -62,12 +62,12 @@
         <button id="stops-tab" role="tab" aria-selected="false" aria-controls="stop-list" data-view="stops" disabled>站點 <span id="stop-tab-count">0</span></button>
       </div>
       <div class="results-heading">
-        <h2 id="results-title">路線清單</h2><span id="results-count"></span>
+        <h2 id="route-list-heading">路線清單</h2><span id="results-count"></span>
         <button id="back-to-routes" class="command-button" hidden title="返回路線清單"><i data-lucide="arrow-left" aria-hidden="true"></i>返回路線清單</button>
         <button id="reset-filters" class="icon-button" hidden title="重設篩選" aria-label="重設篩選"><i data-lucide="filter-x"></i></button>
       </div>
       <div id="route-list" class="result-list" role="tabpanel" aria-labelledby="routes-tab"></div>
-      <div id="stop-list" class="result-list" role="tabpanel" aria-labelledby="stops-tab" hidden></div>
+      <div id="stop-list" class="result-list" role="tabpanel" aria-labelledby="stops-tab results-title" hidden></div>
     </aside>
 
     <section class="map-panel" aria-label="站址表 GPS 地圖">
